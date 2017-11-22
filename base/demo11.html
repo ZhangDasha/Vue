@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<!-- 自定义模块 -->
+	<script type="text/x-template" id="myTemplement">
+  		<p>Hello hello hello</p>
+	</script>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('hello-world', {
+			  template: '#myTemplement'
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<hello-world></hello-world>
+	</div>
+	
+</body>
+</html>

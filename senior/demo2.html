@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义指令v-focus自动获得焦点</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 注册一个全局自定义指令 v-focus
+			Vue.directive('focus',{
+				// 当绑定元素插入到 DOM 中。
+				inserted:function(el){
+					// 聚焦元素
+					el.focus()
+				}
+			})
+			new Vue({
+				el:'#box'
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="text" ><br>
+
+		<input type="text" v-focus>
+	</div>
+</body>
+</html>

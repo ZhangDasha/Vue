@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 属性---methods</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				data:{a:1},
+				methods: {
+				    plus: function () {
+				       this.a+=2
+				    }
+				  }
+			})
+			vm.plus();
+			console.log(vm.a);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
+

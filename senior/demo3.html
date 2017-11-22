@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>渲染函数--通过 level prop 动态生成 heading 标签的组件</title>
+	<script src="vue.js"></script>
+	<script type="text/x-template" id="demo-template">
+		<h1 v-if="level===1">
+			<slot></slot>
+		</h1>
+		<h2 v-else-if="level===2">
+			<slot></slot>
+		</h2>
+		<h3 v-else-if="level===3">
+			<slot></slot>
+		</h3>
+		<h4 v-else-if="level===4">
+			<slot></slot>
+		</h4>
+		<h5 v-else-if="level===5">
+			<slot></slot>
+		</h5>
+		<h6 v-else-if="level===6">
+			<slot></slot>
+		</h6>
+	</script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('select-head',{
+				template:'#demo-template',
+				props:{
+					level:{
+						type:Number,
+						required:true
+					}
+				}
+			})
+			new Vue({
+				el:'#box'
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<select-head v-bind:level="1">hello word</select-head>
+	</div>
+</body>
+</html>

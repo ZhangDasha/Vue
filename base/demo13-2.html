@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prop</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('child',{
+				props:['message'],
+				template:'\
+						<div>\
+						<h3>{{ title }}</h3> \
+						<p>{{ message }}</p>\
+						</div>',
+				data:function(){
+					return {title:'张大想'}  //写成函数模式
+				}
+			});
+			new Vue({
+				el:"#box",
+				data:{
+					poem:['好好学习','天天向上']
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<child v-for="item in poem" v-bind:message="item"></child>
+	</div>
+</body>
+</html>

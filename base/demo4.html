@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var app = new Vue({
+				el:"#box",
+				data:{
+					massage:"页面加载与"+new Date().toLocaleString(),
+					seen:true,
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<span v-bind:title="massage">
+			旋停查看动态绑定；
+		</span>
+		<p v-if = "seen">see you</p>
+	</div>
+</body>
+</html>

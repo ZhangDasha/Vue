@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性的setter</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				data:{
+					firstName:"zhang",
+					lastName:"daXiang",
+				},
+				computed:{
+					fullName:{
+						get:function(){
+							return this.firstName+" "+this.lastName
+						},
+						set:function(newName){
+							var name = newName.split(' ')
+							this.firstName = name[0]
+							this.lastName = name[name.length-1]
+						}
+					}
+				}
+			})
+			console.log(vm.fullName);   //zhang daXiang
+			vm.fullName = "da Sha";			
+			console.log(vm.firstName);		//da
+			console.log(vm.lastName);			//Sha
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slot作用域插槽</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('child',{
+				template:'<div class="child">\
+							<slot text="hello form child"></slot>\
+						 </div>'
+			})
+			// 在父级中，具有特殊属性 scope 的 <template> 元素必须存在，表示它是作用域插槽的模板。scope 的值对应一个临时变量名，此变量接收从子组件中传递的 props 对象
+			Vue.component('parent',{
+				template:'<div>\
+							<child>\
+								<template scope="props">\  
+									<span>hello form parent</span>\
+									<span>{{ props.text }}</span>\
+								</template>\
+							</child>\
+						 </div>'
+			})
+			new Vue({
+				el:'#box',
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<parent></parent>
+	</div>
+</body>
+</html>

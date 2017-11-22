@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 属性-----computed </title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{a:1},
+				computed:{
+					aDouble:function (){
+						return this.a*2
+					},
+					aPlus:{
+						get: function () {
+			        return this.a + 2
+			      },
+			      set: function (v) {
+			        this.a = v - 1
+			      }
+					}
+			}
+			})
+			console.log(vm.aDouble);  //1*2=2
+			console.log(vm.aPlus);		//1+2=3
+			vm.aPlus =3;					//a=3-1
+			console.log(vm.a);			//2
+			console.log(vm.aDouble);	//4
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+</body>
+</html>

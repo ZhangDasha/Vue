@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="bootstrap.js"></script>
+	<script src="vue.js"></script>
+	<script src="vue-resource.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:"#box",
+				data:{
+					
+				},
+				methods:{
+					get:function(){
+						this.$http.get('a.txt').then(function(res){
+							alert(res.data);
+						},function(){
+
+						});
+					}
+				}
+			});
+		};
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="button" value="按钮" @click="get()">
+	</div>
+</body>
+</html>

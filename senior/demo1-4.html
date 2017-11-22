@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全局混合</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.mixin({
+				created:function(){
+					var option = this.$options.myOption
+					if(option){
+						console.log(option)
+					}
+				}
+			})
+			new Vue({
+				myOption:'这是一个全局混合'
+			})
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

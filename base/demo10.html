@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>子组件利用v-on与父组件通信</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+
+			var data = {counter:0}
+
+			Vue.component('button-counter',{
+					template:'<button v-on:click="incrementCounter">{{ counter }}</button>', //子组件点击触发incrementCounter
+					data:function() {
+						return {
+							counter:0
+						}
+					},
+					methods:{
+						incrementCounter:function(){
+							this.counter += 1
+							this.$emit('increment')   //执行当前事件
+						}
+					}
+				}),
+
+			new Vue({
+				el:'#box',
+				data:{
+					total:0
+				},
+				methods:{
+					incrementTotal:function(){
+						this.total += 1
+					}
+				}
+			})
+
+		}
+
+			
+		
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>{{total}}</p>
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+		<!-- 父组件v-on监听子组件触发的事件后，触发函数incrementTotal -->
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+	</div>
+	
+</body>
+</html>

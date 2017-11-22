@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>混合</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			
+			var mixin = {
+				created:function(){
+					this.hello()
+				},
+				methods:{
+					hello:function(){
+					console.log('hello hello hello importion thing said third!')
+					}
+				}
+			}
+			var Component = Vue.extend({
+				mixins:[mixin]
+			})
+			var component = new Component()
+
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

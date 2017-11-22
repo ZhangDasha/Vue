@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绑定HTML的class-----对象语法</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<style type="text/css">
+		.active{
+			width:300px;
+			height:200px;
+			background: red;
+		}
+		.local{
+			margin: 100px 300px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('my-component',{
+				template:'<div class="local"></div>'
+			})
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					isActive:true,
+					isLocal:true,
+					activeClass: 'active'
+				},
+				computed:{
+					classObject:function(){
+						return{
+							active:this.isActive,
+							local:this.isLocal
+						}
+					}
+				}
+			})
+			
+
+		}
+	</script>
+</head>
+<body>
+  <!-- 直接绑定Vue原始data数据-->
+	<!-- <div id="box" v-bind:class="{active:isActive, local:true}"></div> -->   
+  <!-- 绑定computed返回对象的计算属性-->
+	<!-- <div id="box" v-bind:class="classObject"></div> -->
+	<!--  直接绑定数组-->
+	<!-- <div id="box" v-bind:class="[activeClass]"></div> -->
+<!-- 绑定在组件上 -->
+	<div id="box">
+		<my-component class="active"></my-component>
+	</div>
+</body>
+</html>

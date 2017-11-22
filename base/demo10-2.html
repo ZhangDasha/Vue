@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>在内联语句处理器中访问原生 DOM 事件</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				methods:{
+					warn:function(message,event){
+						// 现在我们可以访问原生事件对象
+						if(event) event.preventDefault()   //阻止默认事件
+						alert(message)
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<button type="submit" v-on:click="warn('Form cannot be submitted yet.',$event)">submit</button>
+	</div>
+</body>
+</html>

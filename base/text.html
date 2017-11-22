@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 练习篇-----props 之父组件传值</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function (){
+			Vue.component("todo-item",{
+				props:['todo'],
+				template:'<li>{{ todo }}</li>'
+			})
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					array:['a','b','c','d','e'],
+					a:2
+				},
+				props:{
+					todo:String
+				}
+			})
+			console.log(vm.$data);			//获得Vue原始数据data
+			console.log(vm.$el);				//获得el对应id的DOM
+			console.log(vm.$props);			//
+			vm.$watch('a',function(newValue,oldValue){
+				console.log("new:%s,old:%s",newValue,oldValue)
+			})
+			vm.a = 4;									//当a数值发生改变时触发，返回新值与旧值
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ol>
+			<todo-item v-for="item in array" v-bind:todo="item" v-bind:key="item.index"></todo-item>
+		</ol>
+	</div>
+</body>
+</html>

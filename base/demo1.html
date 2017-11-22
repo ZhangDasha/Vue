@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var c = new Vue({
+				el:'#box',
+				data:{
+					msg:'weclome vue',
+					arr:['apple','orange','banana','pear'],
+					json:{a:'12',b:'23',c:'34',d:'45'}
+				},
+				methods:{
+					show:function(){
+						//alert(1);
+						this.arr.push('aaa');
+					}
+				}
+			});
+		};
+	</script>
+</head>
+<body>
+	<div id="box">
+
+		<!-- <input type="text" v-model='msg'>
+		<br>
+		{{msg}}
+		<br> -->
+
+		<ul>
+			<li v-for="(index,value) in arr"> 
+				{{value}} 	{{index}}
+			</li>			
+		</ul>
+
+		<hr>
+
+		<ul>
+			<li v-for="(value,key) in json">
+				{{value}}  {{key}}
+			</li>
+		</ul>
+
+		<br>
+
+		<input type="button" value="按钮" v-on:click="show()">
+
+		<div style="width: 100px;height: 100px;background: red" v-show="true"></div>
+	</div>
+</body>
+</html>
+
+
+
+

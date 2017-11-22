@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prop数据传递</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+
+		Vue.component('child', {
+		  // 声明 props
+		  props: ['myMessage'],
+		  // 就像 data 一样，prop 可以用在模板内
+		  // 同样也可以在 vm 实例中像 “this.message” 这样使用
+		  template: '<span>{{ myMessage }}</span>'
+		})
+
+		new Vue({
+			el:"#box",
+				})
+
+	}
+</script>
+</head>			
+<body>
+	<div id="box">
+		<child my-message="hello"></child>
+	</div>
+</body>
+</html>
+	
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过渡效果</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					show:true,
+				}
+			})
+		}
+	</script>
+	<style type="text/css">
+		.fade-enter-active, .fade-leave-active {
+		  transition: opacity .5s
+		}
+		.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+		  opacity: 0
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<button v-on:click="show = !show">
+		    Toggle
+		</button>
+		<transition name="fade" :duration="{enter:800,leave:3000}">
+		    <p v-if="show">hello</p>
+		</transition>
+	</div>
+</body>
+</html>

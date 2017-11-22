@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+
+			//显示过滤排序结果
+
+			new Vue({
+				el:'#box',
+				data:{
+					arr:[11,32,54,23,53,23,452,42,74]
+				},
+				computed:{
+					eventArr:function(){
+						return this.arr.filter(function(number){
+							return number%2===0
+						})
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<li  v-for="arr1 in eventArr">{{arr1}}</li>
+		<br>
+		<li v-for="arr2 in arr">{{arr2}}</li>
+	</div>
+	
+</body>
+</html>

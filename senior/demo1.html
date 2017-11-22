@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>混合 (mixins) </title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			//定义一个混合对象
+			Vue.mixin({
+				created:function(){
+					this.hello()
+				},
+				methods:{
+					hello:function(){
+						console.log('I am mixin')
+					},
+					say:function(){  
+            console.log('This is mixin')  
+          }  
+				}
+			})
+			var vm = new Vue({
+				el:'#box',
+				methods:{
+					say:function(){
+						console.log('I am  say')
+					}
+				}
+			})
+			vm.hello();
+			vm.say();
+			
+			/*
+			// 定义一个混合对象
+				var myMixin = {
+				  created: function () {
+				    this.hello()
+				  },
+				  methods: {
+				    hello: function () {
+				      console.log('hello from mixin!')
+				    }
+				  }
+				}
+				// 定义一个使用混合对象的组件
+				var Component = Vue.extend({
+				  mixins: [myMixin]
+				})
+				var component = new Component() // => "hello from mixin!"
+			*/
+
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

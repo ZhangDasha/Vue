@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生命周期勾子</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:"#box",
+				data:{
+					a:1,
+					name:"这是名字",
+					prop:"这是属性"
+				},
+				created:function(){
+					//这里的this指向vm实例
+					console.log("a is ",this.a);
+					document.getElementById("content").textContent = this.name + this.prop
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p id="content"></p>
+	</div>
+</body>
+</html>

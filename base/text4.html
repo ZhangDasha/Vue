@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript属性---- watch</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				data:{
+					a:1,
+					b:2,
+					c:3
+				},
+				watch:{
+					a:function(val,oldVal){
+						console.log("new:%s,old:%s",val,oldVal)
+					},
+					//方法名
+					b:"someMethod",
+					//深度
+					c:{
+						handler:function(val,oldVal) { },
+						deep:true
+					}
+				}
+			})
+			vm.a=2;
+			console.log(vm.b);
+			console.log(vm.c);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

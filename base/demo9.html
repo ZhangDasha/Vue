@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				data:{
+					counter :0,
+					checked:false,
+					checkedNames:[],
+					selected2:'',
+					selected: 'A',
+			    options: [
+			      { text: 'One', value: 'A' },
+			      { text: 'Two', value: 'B' },
+			      { text: 'Three', value: 'C' }
+			    ]
+				},
+				// methods: {
+				//   warn: function (message, event) {
+				//     // 现在我们可以访问原生事件对象
+				//     if (event) event.preventDefault()
+				//     alert(message)
+				//   }
+				// }
+
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<button v-on:click="counter+=1">加1</button>
+		<p>{{counter}}</p>
+
+		<!-- <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit  </button>-->
+
+		<br>
+
+		<input type="checkbox" v-model='checked'>
+		<label>{{checked}}</label>
+
+		<hr>
+
+  		<input type="checkbox" id="jack" value="value" v-model="checkedNames">
+		<label for="jack">Jack</label>
+		<input type="checkbox" id="john" value="John" v-model="checkedNames">
+		<label for="john">John</label>
+		<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+		<label for="mike">Mike</label>
+		<br>
+		<span>Checked names: {{ checkedNames }}</span>
+
+		<hr>
+
+		<select v-model="selected">
+		    <option disabled value="">请选择</option>
+		    <option>A</option>
+		    <option>B</option>
+		    <option>C</option>
+		</select>
+		<span>Selected: {{ selected2}}</span>
+
+
+		<select v-model="selected">
+		  <option v-for="option in options" v-bind:value="option.value">
+		    {{ option.text }}
+		  </option>
+		</select>
+		<span>Selected: {{ selected }}</span>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var c = new Vue({
+				el:'#box',
+				data:{
+					//对象迭代
+					object:{
+						firstName:'Zhang',
+						nextName:'Da',
+						lastname:'Xiang'
+					}
+					//数组遍历
+					// arr:[
+					// 	{mas:"12"},
+					// 	{mas:"21"},
+					// 	{mas:"22"}
+						//12,23,34
+					//]
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box" >
+		<!-- <ul v-for="(arr1,index) in arr">
+			<li >{{index+1}} {{arr1}}</li> 
+		</ul>-->
+		<!-- <ul v-for="item of arr">
+			<li>{{ item.mas}}</li>
+		</ul> -->
+		<ul v-for="(value,key,index) in object">
+			<li>{{ index }} {{ key }}:{{ value }}</li>
+		</ul>
+	</div>
+</body>
+</html>

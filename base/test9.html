@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用key管理可复用的元素</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{loginType:'username'},
+				methods:{
+					target:function(){
+						if(this.loginType!=""){
+							this.loginType = !(this.loginType)
+						}else{
+							this.loginType='username'
+						}
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<template v-if="loginType === 'username'">
+		  <label>Username</label>
+		  <input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+		  <label>Email</label>
+		  <input placeholder="Enter your email address" key="email-input">
+		</template>
+		<button v-on:click="target()">Toggle login type</button>
+	</div>
+</body>
+</html>

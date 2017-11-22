@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+
+			//自定义全局组件
+			var data = {counter:0}
+			Vue.component('my-component',{
+				template:"<button v-on:click='counter+=1'>{{counter}}</button>",
+				data:function(){
+					return {
+						counter:0
+						}
+					}
+			})
+
+
+			var c = new Vue({
+				el:'#box',
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<my-component></my-component>
+		<my-component></my-component>
+		<my-component></my-component>
+	</div>
+</body>
+</html>

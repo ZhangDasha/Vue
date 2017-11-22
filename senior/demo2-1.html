@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义钩子</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.directive('demo',{
+				bind:function(el,binding,vnode){
+					var s = JSON.stringify     			//将对象转换成字符串
+					el.innerHTML=
+							'name:'  			+s(binding.name)+'<br>'+									//指令名，
+							'value:'			+s(binding.value)+'<br>'+									//指令的绑定值
+							'expression:' +s(binding.expression)+'<br>'+
+							//指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+							'argument: '   + s(binding.arg) + '<br>' +							//绑定值的字符串形式
+				      'modifiers: '  + s(binding.modifiers) + '<br>' +				//传给指令的参数。
+				      'vnode keys: ' + Object.keys(vnode).join(', ')					//一个包含修饰符的对象。
+				}
+			})
+			new Vue({
+				el:'#box',
+				data:{
+					message:'hello'
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box" v-demo:zhang.da.xiang="message"></div>
+</body>
+</html>

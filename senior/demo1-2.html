@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项合并</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var mixin={
+				created:function(){
+					console.log("混合对象的钩子被调用")
+				}
+			}
+			
+			var vm = new Vue({
+				mixins:[mixin],
+				created:function(){
+					console.log('组件钩子被调用')
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

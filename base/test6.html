@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性的例子</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{message:'hello'},
+				computed:{
+					reversedMessage1:function(){
+						return this.message.split('').reverse().join('')
+					},
+					now1:function(){
+						return Date.now()
+					}
+				},
+				methods:{
+					reversedMessage2:function(){
+						return this.message.split('').reverse().join('')
+					},
+					now2:function(){
+						return Date.now()
+					}
+				}
+			})
+			console.log(vm.reversedMessage1);
+			vm.message= "Goodby";
+			console.log(vm.reversedMessage1);
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>{{ message }}</p>
+		<p>计算属性反转后：{{ reversedMessage1 }}</p>
+		<br>
+		<p>函数方法反转后：{{ reversedMessage2() }}</p>
+		<br>
+		<p>{{ now1 }}</p>
+		<p>function:{{ now2() }}</p>
+		<p>{{ now1 }}</p>
+		<p>function2:{{ now2() }}</p>
+	</div>
+</body>
+</html>

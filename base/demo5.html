@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var c = new Vue({
+				el:'#box',
+				data:{
+					a:1,
+					styleObject:{
+						color:"red",
+						fontSize:"20px"
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box" :style="styleObject">
+		<p v-if="a===1">ok</p>
+		<p v-else>no</p>
+	</div>
+</body>
+</html>

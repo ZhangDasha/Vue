@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性 VS 观察属性</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					firstName:'zhang',
+					lastName:'daXiang',
+					fullName:'daSha'
+				},
+				watch:{					//若firstName或lastName未发生改变，不会触发watch中的属性方法。直接输出原始数据的fullName(daSha)
+					firstName:function(val){
+						return this.fullName = val + " "+this.lastName
+					},
+					lastName:function(val){
+						return this.fullName = this.firstName +" "+val
+					}
+				}
+				// computed:{														//计算属性始终保持与原始数据同步
+				// 	fullName:function(){
+				// 		return this.firstName + " "+this.lastName
+				// 	}
+				// }
+			})
+			vm.firstName = "AA";
+
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>{{ fullName }}</p>
+	</div>
+</body>
+</html>

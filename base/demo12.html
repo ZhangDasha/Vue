@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>在内联语句处理器中访问原生 DOM 事件</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+
+	// 用特殊变量 $event 把它传入方法：
+
+		window.onload = function(){
+			new Vue({
+				el:"#box",
+				data:{
+					age:'12'
+				},
+				methods:{
+					warn:function(massage,event){
+						//访问原生DOM对象
+						if(event)
+							event.preventDefault()   //阻止默认事件
+						alert(massage)
+					},
+					key:function(){
+						alert("dac")
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<button v-on:click="warn('Form cannot be submitted yet.',$event)">submit</button>
+		<!-- 捕获键盘 -->
+		<input type="text" v-on:keyup.delete="key()">
+
+		<input type="text" v-model.number="age" type="number">
+	</div>
+	
+</body>
+</html>

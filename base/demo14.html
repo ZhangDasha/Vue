@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slot插槽</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.component('child',{
+				template:'<button><slot name="first"></slot>这是具名slot<slot name="second"></slot></button>'
+			})
+			new Vue({
+				el:"#box",
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<child>
+			<p slot="first">ppp1</p>
+			<p slot="second">ppp2</p>
+		</child>
+	</div>
+</body>
+</html>
