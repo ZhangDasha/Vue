@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue的生存周期</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// vue生存周期
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'well'
+				},
+				beforeCreate:function(){					
+					console.log('实例创建之前');
+				},
+				// created   - Vue实例创建时自动触发-----创建阶段
+				created:function(){
+					console.log('实例已经创建');
+				},
+				beforeMount:function(){
+					console.log('在挂载开始之前被调用');
+				},
+				mounted:function(){						//替换了compile和ready
+					console.log('编译');
+				},
+				beforeDestroy:function(){
+					console.log('销毁之前');
+				}
+				
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-computed</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					a:1,
+				},
+				// 计算属性：放置一些业务逻辑的代码，记得return
+				computed:{
+					/*
+					b:function(){
+					//b是个属性，而不是函数.b的值完全取决于此函数的返回值
+						return this.a+1;
+						// a变化，b也跟着+1
+					}
+					*/
+
+					// 计算属性完整写法get+set
+					b:{
+						get:function(){
+							return this.a+1;
+						},
+						set:function(val){
+							this.a = val;
+						}
+					}
+
+				}
+			});
+
+			document.onclick = function(){
+				vm.a = 12;
+				// vm.b = 33;
+			};
+
+		}
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		a =>{{a}}
+		<br>
+		b =>{{b}}
+	</div>
+</body>
+</html>

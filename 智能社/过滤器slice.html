@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		// 更数据配合使用的过滤器
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				data:{
+					arr:[1,2,3,4,5,6,7,8,9]
+				},
+				computed:{
+					filteredItems:function(){
+						return this.arr.slice(2,6)				//slice取得数组arr的前2项
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li v-for="value in filteredItems">{{value}}</li>
+		</ul>
+	</div>
+</body>
+</html>

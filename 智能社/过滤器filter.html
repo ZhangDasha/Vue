@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>filter</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// vue 2.0 过滤器需要自己定义
+			new Vue({
+				el:'#box',
+				data:{
+					arr:['aa','baab','cb','bsa']
+				},
+				computed:{
+					filtered:function(){
+						var self = this;
+						return self.arr.filter(function(value){
+							console.log(typeof(value));					//string
+							return value.match(/a{2}/ig)		//filter选择器需要自己写
+						})
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li v-for="value in filtered">{{value}}</li>
+		</ul>
+	</div>
+</body>
+</html>

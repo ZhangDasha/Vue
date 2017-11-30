@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器-debounce</title>
+	<script src="vue.js"></script>
+	<script src="dist/lodash.js"></script>
+	<script type="text/javascript">
+		// debounce事件延迟
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				data:{},
+				methods:{
+					doStuff:_.debounce(function(){
+						alert(1)
+					},2000)
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="text" @keyup="doStuff">
+	</div>
+</body>
+</html>
