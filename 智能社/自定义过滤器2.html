@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间转换器</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			Vue.filter('date',function(input){
+				var oDate = new Date(input);
+				return oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate()+' '+oDate.getHours()+':'+oDate.getMinutes()+':'+oDate.getSeconds();
+			})
+			new Vue({
+				el:'#box',
+				data:{
+					a:Date.now()
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		{{a | date}}
+	</div>
+</body>
+</html>

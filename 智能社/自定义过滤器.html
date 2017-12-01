@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>过滤器-debounce</title>
+	<title>自定义过滤器</title>
 	<script src="vue.js"></script>
-	<script src="dist/lodash.js"></script>
 	<script type="text/javascript">
-		// debounce事件延迟 需要配合lodash库
 		window.onload = function(){
+			// 自定义过滤器
+			Vue.filter('toDou', function(value){
+				return value<10? '0'+value:''+value 
+			});
 			new Vue({
 				el:'#box',
-				data:{},
-				methods:{
-					doStuff:_.debounce(function(){
-						alert(1)
-					},2000)
+				data:{
+					a:9
 				}
 			});
 		}
@@ -22,7 +21,7 @@
 </head>
 <body>
 	<div id="box">
-		<input type="text" @keyup="doStuff">
+		{{a | toDou}}
 	</div>
 </body>
 </html>

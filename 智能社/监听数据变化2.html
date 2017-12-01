@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$watch-深度监视</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+	// 对于json数据类型 / 对象数据，需要使用深度监视
+	// {deep:true}
+		window.onload = function(){
+			var vm = new Vue({
+				el:'#box',
+				data:{
+					a:{
+						name:'da',
+						age:12,
+						sex:'men'
+					},
+					b:2
+				}
+			});
+			document.onclick = function(){
+				vm.a.age = 22;
+			};
+			vm.$watch('a',function(){
+				alert('json a 发生了变化');
+			},{deep:true})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		{{a}}
+		<br>
+		{{b}}
+	</div>
+</body>
+</html>

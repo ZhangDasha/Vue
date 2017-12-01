@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义指令</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 自定义指令必须是以 v- 开头
+			// 注册一个全局自定义指令 v-red
+			Vue.directive('red',{
+				// 当绑定元素插入到 DOM 中。
+				inserted:function(el,Params){
+					// 操作元素,Params为传递来的参数对象
+					el.style.background = Params.value;
+					console.log(el);	//<span style="background: red;">aaa</span>
+					// 传递参数
+					console.log(Params.value);					//
+				}
+			})
+			new Vue({
+				el:'#box',
+				data:{
+					a:'blue'
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<!-- 使用data内定义的值 -->
+		<!-- <span v-red = 'a'>aaa</span> -->
+
+
+		<!-- 直接传参：注意引号的使用 -->
+		<span v-red="'orange'">aaa</span>
+	</div>
+</body>
+</html>
