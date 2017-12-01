@@ -2,19 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>局部组件2</title>
 	<script src="vue.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
 			new Vue({
 				el:'#box',
+				//将组件所有内容都写入components
+				components:{
+					'my-aa':{
+						template:"<h3>{{msg}}</h3>",
+						data(){
+							return{
+								msg:'aaa'
+							}
+						}
+					}
+				}
 			});
 		}
 	</script>
 </head>
 <body>
 	<div id="box">
-		
+		<my-aa></my-aa>
 	</div>
 </body>
 </html>

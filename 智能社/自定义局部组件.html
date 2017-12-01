@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>局部组件1</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 定义
+			var AA = Vue.extend({
+				template:"<h3>{{msg}}</h3>",
+				data(){
+					return{
+						msg:'I am a lucky boy'
+					}
+				}
+			})
+			new Vue({
+				el:'#box',
+				// 使用components挂载局部组件
+				components:{
+					'aa':AA
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+	</div>
+</body>
+</html>

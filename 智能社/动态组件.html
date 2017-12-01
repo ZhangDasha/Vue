@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡形式</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				data:{
+					a:'aa'
+				},
+				components:{
+					'aa':{
+						template:'<h3>这是aa组件</h3>'
+					},
+					'bb':{
+						template:'<h3>这是bb组件</h3>'
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="button" value="aaa组件" @click="a='aa'">
+		<input type="button" value="bbb组件" @click="a='bb'">
+		<!-- 动态组件的添加
+				<component :is="组件名称"></component>
+		-->
+		<component :is='a'></component>
+	</div>
+</body>
+</html>

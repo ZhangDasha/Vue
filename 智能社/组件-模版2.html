@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模版2</title>
+	<script src="vue.js"></script>
+	<!-- 使用template标签定义模版 注意：所有模版标签必须包裹在一个根标签内-->
+	<template id="a">
+		<div>
+			<h3>{{msg}}</h3>
+			<ul>
+				<li v-for="val in arr">{{val}}</li>
+			</ul>
+		</div>
+	</template>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				components:{
+					'aa':{
+						template:'#a',
+						data(){
+							return{
+								msg:'aaa',
+								arr:['apple','orange','banna']
+							}
+						}
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+	</div>
+</body>
+</html>

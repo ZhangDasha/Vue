@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>全局组件1</title>
 	<script src="vue.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
-			new Vue({
+			var aa = Vue.extend({
+				template:"<h3>This is Title</h3>"
+			});
+			Vue.component('tel',aa);
+			var vm = new Vue({
 				el:'#box',
 			});
 		}
@@ -14,7 +18,7 @@
 </head>
 <body>
 	<div id="box">
-		
+		<tel></tel>
 	</div>
 </body>
 </html>

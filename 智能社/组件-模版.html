@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模版1</title>
+	<script src="vue.js"></script>
+
+	<!-- 字符串模板 -->
+	<!--  模版的编写时：所有模版必须包含在一个主标签内 且模版内不能写注释-->
+	<script type="x-template" id="a">
+
+		<div>
+			<h3>{{msg}}</h3>
+			<ul>
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+			</ul>
+		</div>
+	</script>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				components:{
+					'aa':{
+						template:"#a",
+						data(){
+							return{
+								msg:'aaaa'
+							}
+						}
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa><aa>
+	</div>
+</body>
+</html>

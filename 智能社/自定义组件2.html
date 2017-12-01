@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全局组件2</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 组件里面放数据，data必须是返回形式的函数,且返回的应该是对象(json)
+			Vue.component('aa',{
+				template:"<h3 @click='change'>This is Title By {{msg}}</h3>",
+				data:function(){
+					return {
+						msg:'daSha'
+					}
+				},
+				methods:{
+					change(){
+						// this.msg = "DaXiang
+						this.$el.style.background = 'red';
+					}
+				}
+			});
+			new Vue({
+				el:'#box',
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+	</div>
+</body>
+</html>
