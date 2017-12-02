@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件数据传送--子级获取父级</title>
+	<script src="vue.js"></script>
+	<!-- 子组件获取父组件数据    props -->
+	<template id="a">
+		<div>
+			<h3>这是父组件{{msg}}</h3>
+			<br>
+			<!-- 注意命名，不支持驼峰式命名和‘-’连缀命名
+					js中是‘-’，html中转变成驼峰
+			 -->
+			<bb :m="msg2" :my="msg"></bb>
+		</div>
+	</template>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				// 父组件与子组件的data值是独立的，调用子组件时需要把子组件写入父组件模版
+				components:{
+					'aa':{
+						template:'#a',
+						data(){
+							return{
+								msg:'aaa',
+								msg2:'bbb'
+							}
+						},
+						components:{
+							'bb':{
+								// 接受父组件传值,且值是json格式
+								// 写法一
+								// props:{
+									// 名称：数据类型
+								// 	'm':String
+								// },
+								props:['m','my'],
+								template:'<i>这是子组件{{m}} and {{my}}</i>'
+							}
+						}
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+	</div>
+</body>
+</html>

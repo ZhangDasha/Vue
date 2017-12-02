@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				// 父组件与子组件的data值是独立的，调用子组件时需要把子组件写入父组件模版
+				components:{
+					'aa':{
+						template:'<h3>这是父组件{{msg}}<br><bb></bb></h3>',
+						data(){
+							return{
+								msg:'aaa'
+							}
+						},
+						components:{
+							'bb':{
+								template:'<i>这是子组件{{msg}}</i>',
+								data(){
+									return{
+										msg:'bbb'
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+	</div>
+</body>
+</html>
