@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slot-插槽</title>
+	<script src="vue.js"></script>
+	<template id="aaa">
+		<div>
+			<h3>xxxx</h3>
+			<slot name="ul-slot">这是默认情况1</slot>
+			<slot name="ol-slot">这是默认情况2</slot>
+			<p>hhh</p>
+		</div>
+	</template>
+	<script type="text/javascript">
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				components:{
+					'aa':{
+						template:"#aaa"
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa>
+			<ul slot="ul-slot">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+			</ul>
+			<ol slot="ol-slot">
+				<li>aaa</li>
+				<li>bbb</li>
+				<li>ccc</li>
+			</ol>
+		</aa>
+		<hr>
+		<aa></aa>
+	</div>
+</body>
+</html>

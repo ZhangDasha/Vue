@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js"></script>
+	<script src="dist/vue-router-3.0.1.js"></script>
+	<!-- 定义模版 -->
+	<template id="home">
+		<ul>
+			<li>1111</li>
+			<li>2222</li>
+			<li>3333</li>
+		</ul>
+	</template>
+	<template id="news">
+		<ol>
+			<li>aaaa</li>
+			<li>bbbb</li>
+			<li>cccc</li>
+		</ol>
+	</template>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			// 1.定义组件
+			const Home = {template:'#home'}
+			const News = {template:'#news'}
+
+			// 2.配置路由
+			const router = new VueRouter({
+				// VueRouter含有一个routes数组用来存储路径
+				// router 路由
+				// routes 路线
+				routes:[
+					// redirect 跳转
+					{path:'/',redirect:'/home'},		//默认打开页面
+					{path:'/home',component:Home},
+					{path:'/news',component:News}
+				]
+			});
+
+			// 3.挂载并启动路由
+			new Vue({
+				el:'#box',
+				router
+			})
+
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<!-- 跳转链接 -->
+		<p>
+			<!-- 使用 router-link 组件来导航. -->
+			<!-- 通过传入 `to` 属性指定链接. -->
+			<!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+			<router-link to="/home">Go to Home</router-link>
+			<router-link to="/news">Go to News</router-link>
+		</p>
+		<!-- 展示内容 -->
+		<router-view></router-view>
+	</div>
+</body>
+</html>

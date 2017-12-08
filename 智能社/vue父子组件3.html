@@ -7,7 +7,15 @@
 
 	<template id="a">
 		<div>
-			
+			<span>我是父级 {{msg}}</span>
+			<!-- 为什么get后面不能添加（） -->
+			<bb @child11="get"></bb>
+		</div>
+	</template>
+	<template id="bbb">
+		<div>
+			<h3>我是子组件</h3>
+			<input type="button" value="send" @click="send()">
 		</div>
 	</template>
 
@@ -16,7 +24,37 @@
 			new Vue({
 				el:'#box',
 				components:{
-
+					'aa':{
+						template:'#a',
+						data(){
+							return{
+								msg:'aaa',
+								msg2:'bbb'
+							}
+						},
+						methods:{
+								get(msg){
+									this.msg = msg;
+								}
+							},
+						components:{
+							'bb':{
+								data(){
+									return{
+										'Aa':'我是子组件'
+									}
+								},
+								template:'#bbb',
+								methods:{
+									send(){
+										// 子组件向父组件发送数据 vm.$emit(事件名称，数据)
+										this.$emit('child11',this.Aa);
+									}
+								}
+								
+							}
+						}
+					}
 				}
 			});
 		}
@@ -24,7 +62,7 @@
 </head>
 <body>
 	<div id="box">
-		
+		<aa></aa>
 	</div>
 </body>
 </html>
