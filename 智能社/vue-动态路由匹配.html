@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态路由匹配</title>
+	<style type="text/css">
+		.router-link-active{
+			font-size: 20px;
+			color:red;
+		}
+	</style>
+	<script src="vue.js"></script>
+	<script src="dist/vue-router-3.0.1.js"></script>
+
+	<template id="home">
+		<div>
+			<ul>
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+			</ul>
+			<div>
+				<router-link to="/home/login">登陆</router-link>
+				<router-link to="/home/reg">注册</router-link>
+				<router-view></router-view>
+			</div>
+		</div>
+	</template>
+	<template id="news">
+		<div>
+			<ol>
+				<li>aaa</li>
+				<li>bbb</li>
+				<li>ccc</li>
+			</ol>
+			<div>
+				<router-link to="/news/detail/aaa">新闻页面1</router-link>
+				<router-link to="/news/detail/bbb">新闻页面2</router-link>
+				<router-view></router-view>
+			</div>
+		</div>
+	</template>
+	<template id="login">
+		<h3>这是登陆页面</h3>
+	</template>
+	<template id="reg">
+		<h3>这是注册页面</h3>
+	</template>
+	<template id="detail">
+		<div>
+			<!-- 获取具名路由的下级参数 返回的是一个json -->
+			{{ $route.params.id }}
+			<br>
+			{{$route.path}}
+		</div>
+	</template>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			const Home = {template:'#home'};
+			const News = {template:'#news'};
+			const Login = {template:'#login'};
+			const Reg = {template:'#reg'};
+			const Detail = {template:'#detail'};
+
+			const router = new VueRouter({
+				routes:[
+					{path:'/',redirect:'/home'},
+					{
+						path:'/home',
+						component:Home,
+						children:[
+							{path:'/home/login',component:Login},
+							{path:'/home/reg',component:Reg}
+						]
+					},
+					{
+						path:'/news',
+						component:News,
+						children:[
+							//动态路径参数，以冒号开头
+							{path:'/news/detail/:id',component:Detail},
+							{path:'/news/detail/:id',component:Detail}
+						]
+					}
+				]
+			});
+
+			new Vue({
+				el:'#box',
+				router
+			})
+		}
+	</script>
+	<body>
+		<div id="box">
+			<router-link to="/home">Home</router-link>
+			<router-link to="/news">News</router-link>
+
+			<router-view></router-view>
+		</div>
+	</body>
+</html>
