@@ -13,19 +13,29 @@
 			<li>3333</li>
 		</ul>
 	</template>
-	<template id="news">
-		<ol>
-			<li>aaaa</li>
-			<li>bbbb</li>
-			<li>cccc</li>
-		</ol>
-	</template>
 
 	<script type="text/javascript">
 		window.onload = function(){
-			// 1.定义组件
+			//定义组件的方式
+			//	方式1.<template>标签
+			//	方式2.使用ES6的字符串模版
+
 			const Home = {template:'#home'}
-			const News = {template:'#news'}
+			
+			var News = {
+				template:`
+									<ol>
+										<li>aaaa</li>
+										<li>bbbb</li>
+										<li>cccc</li>
+									</ol>
+								`,
+				data(){
+					return{
+						
+					}
+				}
+			}
 
 			// 2.配置路由
 			const router = new VueRouter({
@@ -34,6 +44,7 @@
 				// routes 路线
 				routes:[
 					// redirect 跳转
+					// ‘/’表示根
 					{path:'/',redirect:'/home'},		//默认打开页面
 					{path:'/home',component:Home},
 					{path:'/news',component:News}

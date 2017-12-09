@@ -20,6 +20,7 @@
 				<li>333</li>
 			</ul>
 			<div>
+				<!-- 此路径为绝对路径 -->
 				<router-link to="/home/login">登陆</router-link>
 				<router-link to="/home/reg">注册</router-link>
 				<router-view></router-view>
@@ -51,13 +52,14 @@
 
 			const router = new VueRouter({
 				routes:[
-					{path:'/',redirect:'/home'},
+					{path:'*',redirect:'/home'},
 					{
 						path:'/home',
 						component:Home,
 						children:[
-							{path:'/home/login',component:Login},
-							{path:'/home/reg',component:Reg}
+							// 此路径为相对路径
+							{path:'login',component:Login},
+							{path:'reg',component:Reg}
 						]
 					},
 					{path:'/news',component:News}

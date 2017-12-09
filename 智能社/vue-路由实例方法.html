@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>动态路由匹配</title>
+	<title>路由实例方法</title>
 	<style type="text/css">
 		.router-link-active{
 			font-size: 20px;
@@ -81,7 +81,6 @@
 						path:'/news',
 						component:News,
 						children:[
-							//动态路径参数，以冒号开头
 							{path:':username/age/:age',component:Detail},
 							{path:':username/age/:age',component:Detail}
 						]
@@ -91,12 +90,25 @@
 
 			new Vue({
 				el:'#box',
-				router
+				router,
+				methods:{
+					push(){
+						// router.push({path:'home'})		直接添加一个路由，表现为切换路由。本质是往历史记录里添加一条记录
+						router.push({path:'home'});
+						// console.log(history);
+					},
+					replace(){
+						router.replace({path:'news'})
+					}
+				}
 			})
 		}
 	</script>
 	<body>
 		<div id="box">
+			<input type="button" value="添加一个路由" @click="push">
+			<input type="button" value="替换一个路由" @click="replace">
+			<br>
 			<router-link to="/home">Home</router-link>
 			<router-link to="/news">News</router-link>
 
