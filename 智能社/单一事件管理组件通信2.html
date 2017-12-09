@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件通信</title>
+	<script src="vue.js"></script>
+	<script type="text/javascript">
+
+	window.onload = function(){
+
+		var event = new Vue({});
+
+		var A = {
+			template:`<div>
+									<h4>组件A</h4>
+									{{a}}
+									<input type="button" value="把A数据给C" @click="send" />
+								</div>`,
+			data(){
+				return{
+					a:'我是A组件的数据'
+				}
+			},
+			methods:{
+				send(){
+					event.$emit('msg-a',this.a);
+					// console.log(this.a);
+				}
+			}
+		}
+		var B = {
+			template:`<div>
+									<h4>组件B</h4>
+									{{b}}
+									<input type="button" value="把B数据给C" @click="send" />
+								</div>`,
+			data(){
+					return{
+						b:'我是B组件的数据'
+					}
+				},
+				methods:{
+					send(){
+						event.$emit('msg-b',this.b)
+					}
+				}
+			}
+			var C = {
+			template:`<div>
+									<h4>组件C</h4>
+									{{a}}
+									{{b}}
+								</div>`,
+			data(){
+					return{
+						a:'',
+						b:''
+					}
+				},
+				mounted(){
+					event.$on('msg-a',a=>this.a=a);
+					event.$on('msg-b',b=>this.b=b);
+				}
+			}
+			new Vue({
+				el:'#box',
+				components:{
+					'aa':A,
+					'bb':B,
+					'cc':C
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+		<bb></bb>
+		<cc></cc>
+	</div>
+</body>
+</html>

@@ -7,7 +7,7 @@
       <li>{{msg}}</li>
     </ul>
     <hr>
-    <menu></menu>
+    <router-link to="/Menu.vue">Menu</router-link>
     <router-view></router-view>
   </div>
 </template>

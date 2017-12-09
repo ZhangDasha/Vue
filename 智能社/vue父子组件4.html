@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>子组件更改父组件数据</title>
+	<script src="vue.js"></script>
+
+	<template id="a">
+		<div>
+			<span>我是子组件</span>
+			<input type="button" value="更改" @click="change">
+			<span>{{msg.a}}</span>
+		</div>
+	</template>
+	<script type="text/javascript">
+		// vue2.0子组件更改父组件数据的方法：
+		// 父组件传递给子组件一个json对象，对象的引用。
+		window.onload = function(){
+			new Vue({
+				el:'#box',
+				data:{
+					giveData:{
+						a:"这是父组件的值"
+					}
+				},
+				components:{
+					'child':{
+						props:['msg'],
+						template:'#a',
+						methods:{
+							change(){
+								this.msg.a = "被更改了";
+								// alert(1);
+							}
+						}
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		父级：{{giveData.a}}
+		<child :msg="giveData"></child>
+	</div>
+</body>
+</html>
