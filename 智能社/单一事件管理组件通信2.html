@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>组件通信</title>
+	<title>组件通信--$emit与$on</title>
 	<script src="vue.js"></script>
 	<script type="text/javascript">
 
@@ -58,6 +58,7 @@
 					}
 				},
 				mounted(){
+					// 如果不用bind()绑定this，可以使用箭头函数
 					event.$on('msg-a',a=>this.a=a);
 					event.$on('msg-b',b=>this.b=b);
 				}
