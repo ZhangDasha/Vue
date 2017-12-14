@@ -14,6 +14,8 @@
 
 <script>
 import {mapGetters,mapActions} from 'vuex'
+// mapGetters 将 store 中的 getter 映射到局部计算属性
+// mapActions 
 
 export default {
   name: 'app',
@@ -22,6 +24,7 @@ export default {
     'getOdd'
   ]),
   methods:mapActions([
+    // 在组件中使用 this.$store.dispatch('xxx') 分发 action，或者使用 mapActions 辅助函数将组件的 methods 映射为 store.dispatch 调用
       'increment',
       'decrement',
       'clickOdd',
