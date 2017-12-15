@@ -7,7 +7,17 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
+// 从此处开始插入代码mock数据
+const express = require('express')
+const app = express()
+// 加载本地数据文件
+var appData = require('../data.json')
+// 获取对应的本地数据
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
+var apiRoutes = express.Router()
+app.use('/api', apiRoutes)
 
 
 const HOST = process.env.HOST
@@ -37,6 +47,27 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before(app) {
+      app.get('/api/seller', (req, res) => {
+        res.json({
+          errno: 0,
+          data: seller
+        })
+      }),
+      // 接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+      app.get('/api/goods', (req, res) => {
+        res.json({
+          errno: 0,
+          data: goods
+        })
+      }),
+      app.get('/api/ratings', (req, res) => {
+        res.json({
+          errno: 0,
+          data: ratings
+        })
+      })
     }
   },
   plugins: [
