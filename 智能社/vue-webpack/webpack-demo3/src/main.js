@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
+import VueRouter from 'vue-router'
 
 import routerConfig from './router.config.js'
 // import './assets/css/1.css'
