@@ -12,9 +12,9 @@
         <router-link to="/seller" class="link">seller</router-link>
       </div>
     </div>
-    <div class="content">
-     <router-view></router-view>
-   </div>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -36,8 +36,9 @@ export default {
   },
   created () {
     axios.get('api/seller').then((res) => {
-      if (res.data.errno === ERR_OK) {
-        this.seller = res.data.data
+      res = res.data
+      if (res.errno === ERR_OK) {
+        this.seller = res.data
         // console.log(this.seller.avatar)
       }
     })

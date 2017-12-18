@@ -1,6 +1,6 @@
-import Goods from './router/goods.vue'
-import Ratings from './router/ratings.vue'
-import Seller from './router/seller.vue'
+import Goods from './components/goods/goods.vue'
+import Ratings from './components/ratings/ratings.vue'
+import Seller from './components/seller/seller.vue'
 
 export default{
   routes: [
