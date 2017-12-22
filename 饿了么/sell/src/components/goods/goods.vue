@@ -1,16 +1,44 @@
 <template>
   <div>
     <div class="goods">
-      <div class="menu-wrapper">
+      <!-- v-el 获取DOM对象 -->
+      <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <li v-for="(item, index) in goods" class="menu-item">
+          <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)" ref="menuList">
             <span class="text border-1px">
               <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
           </li>
         </ul>
       </div>
-      <div class="foods-wrapper"></div>
+      <div class="foods-wrapper" ref="foodsWrapper">
+        <ul>
+          <li v-for="item in goods" class="food-list" ref="foodList">
+            <h1 class="title">{{item.name}}</h1>
+            <ul>
+              <li v-for="food in item.foods" class="food-item border-1px">
+                <div class="icon">
+                  <img :src="food.icon" width="57" height="57">
+                </div>
+                <div class="content">
+                  <h2 class="name">{{food.name}}</h2>
+                  <p class="desc">{{food.description}}</p>
+                  <div class="extra">
+                    <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="now">¥{{food.price}}</span><span v-show="food.oldPrice" class="old">¥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <cartcontrol :food = "food"></cartcontrol>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
   </div>
 </template>
@@ -18,6 +46,9 @@
 <script>
 
 import axios from 'axios'
+import BScroll from 'better-scroll'
+import shopcart from '../shopcart/shopcart.vue'
+import cartcontrol from '../cartcontrol/cartcontrol.vue'
 const ERR_OK = 0
 
 export default {
@@ -28,7 +59,35 @@ export default {
   },
   data () {
     return {
-      goods: []
+      goods: [],
+      listHeight: [],
+      scrollY: 0
+    }
+  },
+  computed: {
+    currentIndex () {
+      for (let i = 0; i < this.listHeight.length; i++) {
+        let height1 = this.listHeight[i]
+        let height2 = this.listHeight[i + 1]
+        if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          this._followScroll(i)
+          return i
+        }
+      }
+      return 0
+    },
+    selectFoods () {
+      let foods = []
+      // selectFoods监视food属性的变化实现联动
+      this.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          // 如果属性food有count属性，则代表被选中
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   created () {
@@ -38,9 +97,73 @@ export default {
       res = res.data
       if (res.errno === ERR_OK) {
         this.goods = res.data
-        // console.log(this.goods)
+        // console.log(this.goods[0])
+        this.$nextTick(() => {
+          this._initScroll()
+          this._calculateHeight()
+        })
       }
     })
+  },
+  methods: {
+    selectMenu (index, event) {
+      // 获取$event事件，（pc与移动端不兼容）阻止pc端多次执行
+      if (!event._constructed) {
+        return
+      }
+      // console.log(index)
+      let foodList = this.$refs.foodList
+      let el = foodList[index]
+      this.foodsScroll.scrollToElement(el, 300)
+    },
+    _drop (target) {
+      // 异步执行下落动画
+      this.$nextTick(() => {
+        // $refs访问子组件shopcart
+        this.$refs.shopcart.drop(target)
+      })
+      console.log('2')
+    },
+    _initScroll () {
+      this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+        // better-scroll库会阻止默认事件（阻止menu-item点击）
+        click: true
+      })
+      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        click: true,
+        probeType: 3
+      })
+      this.foodsScroll.on('scroll', (pos) => {
+        // 判断滑动方向，避免下拉时分类高亮错误（如第一分类商品数量为1时，下拉使得第二分类高亮 pos.y滚动时是负值）
+        if (pos.y <= 0) {
+          this.scrollY = Math.abs(Math.round(pos.y))
+        }
+      })
+    },
+    _calculateHeight () {
+      let foodList = this.$refs.foodList
+      let height = 0
+      this.listHeight.push(height)
+      for (let i = 0; i < foodList.length; i++) {
+        let item = foodList[i]
+        height += item.clientHeight
+        this.listHeight.push(height)
+      }
+    },
+    _followScroll (index) {
+      let menuList = this.$refs.menuList
+      let el = menuList[index]
+      this.menuScroll.scrollToElement(el, 300, 0, -1)
+    }
+  },
+  components: {
+    shopcart,
+    cartcontrol
+  },
+  events: {
+    'add' (target) {
+      this._drop(target)
+    }
   }
 }
 </script>
@@ -55,6 +178,7 @@ export default {
     width: 100%
     bottom: 46px
     overflow: hidden
+
     .menu-wrapper
       flex: 0 0 80px
       width: 80px
@@ -65,6 +189,14 @@ export default {
         height: 54px
         padding: 0 12px
         line-height: 14px
+        &.current
+          position: relative
+          z-index: 10
+          margin-top: -1px
+          background: #fff
+          font-weight: 700
+          .text
+            border-none()
         .icon
           display: inline-block
           vertical-align: top
@@ -89,6 +221,64 @@ export default {
           font-size: 12px
           vertical-align: middle
           border-1px(rgba(7, 17, 27, 0.1))
+
     .foods-wrapper
       flex: 1
+      .title
+        padding-left: 14px
+        height: 26px
+        line-height: 26px
+        border-left: 2px solid #d9dde1
+        font-size: 12px
+        color: rgb(147,153,159)
+        background: #f3f5f7
+      .food-item
+        display: flex
+        margin: 8px
+        padding-bottom: 18px
+        border-1px(rgba(7, 17, 27, 0.1))
+        &:last-child
+          border-none()
+          margin-bottom: 0
+        .icon
+          flex: 0 0 57px
+          margin-right: 10px
+        .content
+          flex: 1
+          .name
+            margin: 2px 0 8px 0
+            height: 14px
+            line-height: 14px
+            font-size: 14px
+            color: rgb(7,17,27)
+          .desc, .extra
+            line-height: 10px
+            font-size: 10px
+            color: rgb(147,153,159)
+          .desc
+            line-height: 12px
+            margin-bottom: 8px
+          .extra
+            .count
+              margin-right: 12px
+          .price
+            font-weight: 700
+            line-height: 24px
+            .now
+              margin-right: 8px
+              font-size: 14px
+              color: rgb(240,20,20)
+            .old
+              text-decoration: line-through
+              font-size: 10px
+              color: rgb(147,153,159)
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 12px
+
+
+
+
+
 </style>

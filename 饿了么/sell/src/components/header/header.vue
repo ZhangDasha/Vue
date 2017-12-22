@@ -36,7 +36,7 @@
           striky footers布局需要三层：
               一层用来填充屏幕，(detail-wrapper) 
               二层与一层同级(detail-close)，使用负margin，向上提升位置
-              三层(detail-main)使用padding-bottom 用于撑开内容，给X
+              三层(detail-main)使用padding-bottom 用于撑开内容，留出位置给close
         -->
           <div class="detail-main">
             <h1 class="name">{{seller.name}}</h1>

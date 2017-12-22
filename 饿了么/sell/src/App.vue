@@ -13,7 +13,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view></router-view>
+      <router-view :seller="seller"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -26,6 +26,16 @@ const ERR_OK = 0
 
 export default {
   name: 'app',
+  props: {
+    deliveryPrice: {
+      type: Number,
+      default: 0
+    },
+    minPrice: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
       seller: {}
