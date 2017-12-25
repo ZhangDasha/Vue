@@ -16,9 +16,9 @@
           <li v-for="item in goods" class="food-list" ref="foodList">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li v-for="food in item.foods" class="food-item border-1px">
+              <li  v-for="food in item.foods" class="food-item border-1px">
                 <div class="icon">
-                  <img :src="food.icon" width="57" height="57">
+                  <img :src="food.icon" width="57" height="57" @click="selectFood(food,$event)">
                 </div>
                 <div class="content">
                   <h2 class="name">{{food.name}}</h2>
@@ -40,6 +40,7 @@
       </div>
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
+    <food :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -49,6 +50,7 @@ import axios from 'axios'
 import BScroll from 'better-scroll'
 import shopcart from '../shopcart/shopcart.vue'
 import cartcontrol from '../cartcontrol/cartcontrol.vue'
+import food from '../food/food.vue'
 const ERR_OK = 0
 
 export default {
@@ -61,7 +63,8 @@ export default {
     return {
       goods: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      selectedFood: {}
     }
   },
   computed: {
@@ -116,6 +119,14 @@ export default {
       let el = foodList[index]
       this.foodsScroll.scrollToElement(el, 300)
     },
+    selectFood (food, event) {
+      if (!event._constructed) {
+        return
+      }
+      this.selectedFood = food
+      // 获取到组件food的show方法
+      this.$refs.food.show()
+    },
     _drop (target) {
       // 异步执行下落动画
       this.$nextTick(() => {
@@ -140,6 +151,7 @@ export default {
         }
       })
     },
+    // 函数规范：一般以下划线开头的方法，为组件私有方法
     _calculateHeight () {
       let foodList = this.$refs.foodList
       let height = 0
@@ -158,13 +170,14 @@ export default {
   },
   components: {
     shopcart,
-    cartcontrol
-  },
-  events: {
-    'add' (target) {
-      this._drop(target)
-    }
+    cartcontrol,
+    food
   }
+  // events: {
+  //   'add' (target) {
+  //     this._drop(target)
+  //   }
+  // }
 }
 </script>
 
