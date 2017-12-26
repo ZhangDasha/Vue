@@ -418,8 +418,4 @@
       background: rgba(7,17,27,0)
 
 
-
-
-
-
 </style>
