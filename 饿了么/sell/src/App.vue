@@ -20,9 +20,11 @@
 
 <script>
 import axios from 'axios'
+import {urlParse} from './common/js/util.js'
 import header from './components/header/header.vue'
 
 const ERR_OK = 0
+const debug = process.env.NODE_ENV !== 'production'
 
 export default {
   name: 'app',
@@ -38,18 +40,28 @@ export default {
   },
   data () {
     return {
-      seller: {}
+      seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        }
     }
   },
   components: {
     'v-header': header
   },
   created () {
-    axios.get('api/seller').then((res) => {
+    const url = debug ? '/api/seller' : 'http://ustbhuangyi.com/sell/api/seller'
+    // axios.get('api/seller').then((res) => {
+    axios.get(url + '?id=' + this.seller.id).then((res) => {
       res = res.data
       if (res.errno === ERR_OK) {
-        this.seller = res.data
+        // this.seller = res.data
+        this.seller = Object.assign({}, this.seller, res.data)
         // console.log(this.seller.avatar)
+        // 获取id号
+        console.log(this.seller.id)
       }
     })
   }
