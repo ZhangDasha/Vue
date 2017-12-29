@@ -12,6 +12,7 @@
         <router-link to="/seller" class="link">商家</router-link>
       </div>
     </div>
+    <!-- keep-alive 实现组件切换，状态保留的功能 -->
     <keep-alive>
       <router-view :seller="seller"></router-view>
     </keep-alive>
@@ -61,7 +62,7 @@ export default {
         this.seller = Object.assign({}, this.seller, res.data)
         // console.log(this.seller.avatar)
         // 获取id号
-        console.log(this.seller.id)
+        // console.log(this.seller.id)
       }
     })
   }

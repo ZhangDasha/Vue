@@ -115,6 +115,7 @@
           return
         }
         this.favorite = !this.favorite
+        // 使用localstorage，存取
         saveToLocal(this.seller.id, 'favorite', this.favorite)
       },
       _initScroll () {
