@@ -30,7 +30,7 @@
                     <span class="now">¥{{food.price}}</span><span v-show="food.oldPrice" class="old">¥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <cartcontrol :food = "food"></cartcontrol>
+                    <cartcontrol :food = "food" @add="addFood"></cartcontrol>
                   </div>
                 </div>
               </li>
@@ -40,7 +40,7 @@
       </div>
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
-    <food :food="selectedFood" ref="food"></food>
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -51,7 +51,9 @@ import BScroll from 'better-scroll'
 import shopcart from '../shopcart/shopcart.vue'
 import cartcontrol from '../cartcontrol/cartcontrol.vue'
 import food from '../food/food.vue'
-const ERR_OK = 0
+
+  const ERR_OK = 0
+  const debug = process.env.NODE_ENV !== 'production'
 
 export default {
   props: {
@@ -95,7 +97,8 @@ export default {
   },
   created () {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
-    axios.get('api/goods').then((res) => {
+    const url = debug ? '/api/goods' : 'http://ustbhuangyi.com/sell/api/goods'
+    axios.get(url).then((res) => {
       // console.log(res)
       res = res.data
       if (res.errno === ERR_OK) {
@@ -126,6 +129,9 @@ export default {
       this.selectedFood = food
       // 获取到组件food的show方法
       this.$refs.food.show()
+    },
+    addFood (target) {
+      this._drop(target)
     },
     _drop (target) {
       // 异步执行下落动画
@@ -173,11 +179,6 @@ export default {
     cartcontrol,
     food
   }
-  // events: {
-  //   'add' (target) {
-  //     this._drop(target)
-  //   }
-  // }
 }
 </script>
 
