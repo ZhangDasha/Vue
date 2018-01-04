@@ -1,38 +1,64 @@
 <template>
   <div class="recommend" ref="recommend">
-    <div class="recommend-content" ref="scroll">
-      <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
-        <slider>
-          <div v-for="item in recommends">
-            <a :href="item.linkUrl">
-              <img :src="item.picUrl">
-            </a>
-          </div>
-        </slider>
+    <scroll class="recommend-content" ref="scroll" :data="discList">
+      <div>
+        <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
+          <slider>
+            <div v-for="item in recommends">
+              <a :href="item.linkUrl">
+                <img class="needsclick" @load="loadImage" :src="item.picUrl">
+              </a>
+            </div>
+          </slider>
+        </div>
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+          <ul>
+            <li v-for="item in discList" class="item">
+              <div class="icon">
+                <img v-lazy="item.imgurl" width="60" height="60">
+              </div>
+              <div class="text">
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="recommend-list">
-        <h1 class="list-title">热门歌单推荐</h1>
-        <ul></ul>
+      <div class="loading-container" v-show="!discList.length">
+        <loading></loading>
       </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
 <script>
+  import Scroll from 'base/scroll/scroll.vue'
   import Slider from 'base/slider/slider.vue'
-  import {getRecommend} from 'api/recommend'
+  import Loading from 'base/loading/loading.vue'
+  import {getRecommend, getDiscList} from 'api/recommend'
   import {ERR_OK} from 'api/config'
 
   export default {
     data() {
       return {
-        recommends: []
+        recommends: [],
+        discList: []
       }
     },
     created() {
       this._getRecommend()
+      this._getDiscList()
     },
     methods: {
+      loadImage() {
+        // 设置标识位
+        if (!this.checkloaded) {
+          this.checkloaded = true
+          this.$refs.scroll.refresh()
+        }
+      },
       _getRecommend() {
         getRecommend().then((res) => {
           if (res.code === ERR_OK) {
@@ -40,10 +66,20 @@
             this.recommends = res.data.slider
           }
         })
+      },
+      _getDiscList() {
+        getDiscList().then((res) => {
+          if (res.code === ERR_OK) {
+            // console.log(res.data.list)
+            this.discList = res.data.list
+          }
+        })
       }
     },
     components: {
-      Slider
+      Slider,
+      Scroll,
+      Loading
     }
   }
 </script>

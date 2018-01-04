@@ -13,6 +13,7 @@
 <script type="text/ecmascript-6">
   import {addClass} from 'common/js/dom'
   // better-scroll此版本为0.1.15,最新版本写法有改动
+  // better-scroll作用域：父元素的第一个子元素起作用
   import BScroll from 'better-scroll'
 
   export default {
@@ -43,16 +44,20 @@
         this._initDots()
         this._initSlider()
 
+        // 自动播放
         if (this.autoPlay) {
           this._play()
         }
       }, 20)
 
+      // 当窗口大小改变，
       window.addEventListener('resize', () => {
         if (!this.slider) {
           return
         }
+        // 图片尺寸重新计算
         this._setSliderWidth(true)
+        // slider刷新
         this.slider.refresh()
       })
     },
@@ -68,6 +73,7 @@
       clearTimeout(this.timer)
     },
     methods: {
+      // 设置标志位isResize
       _setSliderWidth(isResize) {
         this.children = this.$refs.sliderGroup.children
 
@@ -80,6 +86,7 @@
           child.style.width = sliderWidth + 'px'
           width += sliderWidth
         }
+        // 当存在isResize时，不进行该操作
         if (this.loop && !isResize) {
           width += 2 * sliderWidth
         }
@@ -96,10 +103,12 @@
           snapSpeed: 400
         })
 
+        // 给slider绑定一个事件
         this.slider.on('scrollEnd', () => {
           // 获取当前子元素
           let pageIndex = this.slider.getCurrentPage().pageX
           if (this.loop) {
+            // 在better-scroll循环模式下默认情况会为第一个元素添加一个拷贝
             pageIndex -= 1
           }
           this.currentPageIndex = pageIndex
