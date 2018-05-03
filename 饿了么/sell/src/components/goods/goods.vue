@@ -55,6 +55,41 @@ import food from '../food/food.vue'
   const ERR_OK = 0
   const debug = process.env.NODE_ENV !== 'production'
 
+  /*
+  第三方js库better-scroll使用说明
+      1.better-scroll 只处理容器（wrapper）的第一个子元素（content）的滚动，其它的元素都会被忽略。
+
+      2.new BScroll()对象实例化的第一个参数是一个原生的 DOM 对象。当然，如果传递的是一个字符串，better-scroll 内部会尝试调用 querySelector 去获取这个 DOM 对象
+
+      3.获取对象的方法：Vue.js 提供了我们一个获取 DOM 对象接口 vm.$refs
+
+      4.开发中可以把 this.$nextTick 替换成 setTimeout(fn, 20) 也是可以的
+
+      5.在实际工作中，列表的数据往往都是异步获取的，因此我们初始化 better-scroll 的时机需要在数据获取后
+
+      6.better-scroll常见属性，通过 props 的形式：
+          probeType：滚动的时候派发scroll事件，是否截流
+          click：点击列表是否派发click事件
+          scrollX：是否开启横向滚动
+          listenScroll： 是否开启滚动事件
+          data： 列表的数据
+          pullup：是否派发滚动到底的事件，用于上拉刷新
+          pulldown： 是否派发顶部下拉的事件，用于下拉刷新
+          beforeScroll： 是否派发列表滚动开始的事件
+          refreshDelay： 当数据更新后，刷新scroll的延迟
+
+      7.better-scroll常用方法
+          refresh() 重新计算 better-scroll
+          scrollTo(x,y,time,easing)  滚动到制定位置
+          scrollBy(x,y,time,easing)  相对于当前位置偏移滚动x，y的距离
+          scrollToElement(el,time,offsetX,offsetY,easing) 滚动到指定的目标元素
+          stop()  立即停止当前运行的滚动动画
+          enable()  开启better-scroll，默认是开启
+          disable()
+          destroy()
+
+  */
+
 export default {
   props: {
     seller: {

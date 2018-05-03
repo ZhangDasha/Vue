@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>computed属性高级用法-----get / set</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{num}}</div>
+    <div>{{ fullName }}</div>
+    <button v-on:click="num++">click me</button>
+    <button v-on:click="changeName">change</button>
+    <button v-on:click="changeFullName">changeFullName</button>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:"#app",
+      data:{
+        num:0,
+        firstName:"daXiang",
+        lastName:"Zhang"
+      },
+      /*
+        获取fullName就会执行get属性
+        执行changeFullName方法，lastName与firstName会发生改变，因此连带着又出发了get方法
+      */
+      computed:{
+        fullName:{
+          get:function(){
+            alert("1-2");
+            return this.lastName + " " + this.firstName
+          },
+          set:function(newValue){
+            var str = newValue.split(" ");
+            this.lastName = str[0];
+            this.firstName = str[1];
+          }
+        }
+      },
+      methods:{
+        changeName:function(){
+          this.firstName = "ming";
+          this.lastName = "xiao";
+        },
+        changeFullName:function(){
+          this.fullName = "xiao hong";
+        }
+      }
+    })
+  </script>
+</body>
+</html>

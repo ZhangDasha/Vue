@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>动态添加新的根级响应式属性</title>
+  <script src="vue.js"></script>
+  <script type="text/javascript">
+    window.onload = function(){
+      var vm = new Vue({
+        el:"#box",
+        data:{
+          message:'123',
+        },
+        // template:'<p> {{ message}} </p>'
+
+      })
+      vm.message = 'new message'
+        //vm.$el.textContent === 'new message' // false
+      Vue.nextTick(function () {
+        vm.$el.textContent === 'new message' // true
+      })
+    }
+  </script>
+</head>
+<body>
+  <div id="box">
+    {{ message }}
+  </div>
+</body>
+</html>

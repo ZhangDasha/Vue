@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>通过style修改css</title>
+  <script src="vue.js"></script>
+  <style type="text/css">
+    .animation{
+      animation: strentch 1.0s ease-out;
+    }
+    @keyframes strentch
+    {
+      0%{
+        transform: scale(0.3);
+      }
+      100%{
+        transform: scale(1);
+      }
+    }
+    }
+  </style>
+  
+</head>
+<body>
+  <div id="app"  >
+    <!-- 
+      双引号内可以是简单的js表达式
+     -->
+    <div v-bind:style="[styles, styles1]" v-bind:class="{ animation: styles.animation }"></div>
+    <div v-bind:style="styles2" ></div>
+    <button v-on:click="change">change</button>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:"#app",
+      data:{
+        styles:{
+          width:200+ 'px',
+          height:200 + 'px',
+          backgroundColor:"red",
+         animation:true
+        },
+        styles1:{
+          /*
+            可以是html/css命名形式的字符串；
+            也可以是js命名的小驼峰
+          */
+          // 'border-radius' : '10px'
+          borderRadius : 50 + '%'
+        },
+        styles2:{
+          width: 0,
+          height: 0,
+          border:100+'px solid transparent',
+          borderBottomColor:'red'
+          
+        }
+      },
+      methods:{
+        change:function(){
+          if(this.styles.backgroundColor === 'red')
+            this.styles.backgroundColor = 'yellow';
+          else
+            this.styles.backgroundColor = 'red';
+        }
+      }
+    })
+  </script>
+</body>
+</html>

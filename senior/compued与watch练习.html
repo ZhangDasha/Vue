@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>computed and watch practice</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="movie in formateMovie">{{movie}}</li>
+      <button v-on:click="addMovie">添加电影</button>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:"#app",
+      data:{
+        movies:[{
+          name:"捉妖记",
+          year:2018
+        },{
+          name:"星球大战8",
+          year:2018
+        },{
+          name:"唐人街探案2",
+          year:2018
+        }]
+      },
+      /*
+        当触发addMovie事件时，movies内容发生改变，连带着出发computed
+      */
+      computed:{
+        formateMovie:function(){
+          /*
+              将数组的每一项都变成满足要求的形式
+          */
+          return this.movies.map(function(movie){
+            return movie.name + " (" + movie.year + ")";
+          })
+        }
+      },
+      watch:{
+        /*
+          监听movies对象
+        */
+        movies:function(newValue){
+          alert("我添加了"+newValue[newValue.length-1].name)
+        }
+      },
+      methods:{
+        addMovie:function(){
+          this.movies.push({
+            name:"妖猫传",
+            year:2017
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

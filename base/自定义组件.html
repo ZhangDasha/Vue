@@ -8,6 +8,10 @@
 		window.onload = function(){
 
 			//自定义全局组件
+			/*
+				组件中要求data函数返回形式，是为了避免在调用多个自定义组件时，数据污染。
+				定义为函数的返回形式，在每次使用组件时都会返回一个全新的data
+			*/
 			var data = {counter:0}
 			Vue.component('my-component',{
 				template:"<button v-on:click='counter+=1'>{{counter}}</button>",

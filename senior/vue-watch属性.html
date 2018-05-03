@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>watch属性</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="searchInfo">
+    <p v-if="showSearching">正在搜索。。。。</p>
+    <ul>
+      <li v-for="item in result">{{item}}</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:"#app",
+      data:{
+        searchInfo:"",
+        showSearching:false,
+        result:[]
+      },
+      watch:{
+        searchInfo:function(query){
+          // console.log(query);
+          var that = this;
+          this.showSearching=true;
+          /*
+            setTimeout方法内部的this不在指向vue实例对象
+            解决方法：
+              1. 使用箭头函数
+              2. 使用变量存储this对象
+          */
+          setTimeout(function(){
+            that.result = ["html", "css", "js"];
+            that.showSearching=false;
+          }, 500);
+          
+        }
+      }
+    })
+  </script>
+</body>
+</html>

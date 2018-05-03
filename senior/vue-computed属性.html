@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>computed属性</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{num}}</div>
+    <div>{{ fullName }}</div>
+    <div>{{ fullName }}</div>
+    <button v-on:click="num++">click me</button>
+    <button v-on:click="changeName">change</button>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el:"#app",
+      data:{
+        num:0,
+        firstName:"daXiang",
+        lastName:"Zhang"
+      },
+      /*
+        compued内部方法与date的调用一样。不需要加 () 。
+        computed就是将本该在data内定义的数据改写为函数形式
+          1. Vue会分析计算属性函数內的代码，只有在依赖的变量发生改变时才会再次执行。
+          2. 计算属性的缓存机制，再次执行上步操作时会直接读缓存，不会在执行一次函数
+      */
+      computed:{
+        fullName:function(){
+          alert("1");
+          return this.lastName + this.firstName;
+        }
+      },
+      methods:{
+        changeName:function(){
+          this.firstName = "ming";
+          this.lastName = "xiao";
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义局部组件---components</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div>
+    <div id="app1">
+      <my-compontent></my-compontent>
+    </div>
+    <div id="app2">
+      <my-compontent>error</my-compontent>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var component = {
+      template:`<div>
+        <h1>联系方式</h1>
+        <p>{{msg}}</p>
+      </div>`,
+      data:function(){
+        return{
+          msg:1234567
+        }
+      }
+    }
+    new Vue({
+      el:"#app1",
+      // 局部组件只有在app1中可用
+      components:{
+        'my-compontent':component
+      }
+    })
+  </script>
+</body>
+</html>
