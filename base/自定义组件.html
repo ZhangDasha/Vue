@@ -12,6 +12,14 @@
 				组件中要求data函数返回形式，是为了避免在调用多个自定义组件时，数据污染。
 				定义为函数的返回形式，在每次使用组件时都会返回一个全新的data
 			*/
+
+
+			/*
+				组件三大知识点：
+					1. 父组件向子组件传值，父：绑定自定义属性		子：props过滤自定义属性
+					2. 子组件向父组件传值，子：在事件函数中利用 this.$emit(“父自定义事件”)  父： 监听自定义事件
+					3. 父组件向子组件传DOM节点： 父： 自定义标签內正常写html标签		子： slot接收
+			*/
 			var data = {counter:0}
 			Vue.component('my-component',{
 				template:"<button v-on:click='counter+=1'>{{counter}}</button>",

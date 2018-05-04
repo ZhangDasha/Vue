@@ -16,13 +16,13 @@
       子改变父变量值：
         触发一个自定义事件，
      -->
-    <app-share @shared="fooShare"></app-share>
+    <app-share @shared="fooShare($event, 10)"></app-share>
   </div>
 </template>
 <script >
-import moment from "moment"
-import Author from "./author.vue"
-import Share from "./share.vue"
+  import moment from "moment"
+  import Author from "./author.vue"
+  import Share from "./share.vue"
   export default {
     data(){
       return{
@@ -46,8 +46,13 @@ import Share from "./share.vue"
       "app-share":Share
     },
     methods:{
-      fooShare(){
+      /*
+        自定义事件也有事件源对象
+      */
+      fooShare(event, age){
+        
         this.shareTime++;
+        console.log(event, age);
       }
     }
   }

@@ -6,6 +6,10 @@
 	<script src="vue.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
+			/*
+	    插槽的使用:父组件向子组件传DOM节点
+	      在自定义标签內嵌套html子标签，子标签就会自动放入slot內
+			*/
 			Vue.component('child',{
 				template:'<button><slot name="first"></slot>这是具名slot<slot name="second"></slot></button>'
 			})
