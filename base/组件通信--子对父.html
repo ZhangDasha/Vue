@@ -7,6 +7,12 @@
 	<script type="text/javascript">
 		window.onload = function(){
 
+			/*
+				组件通信---子对父
+      		通过触发自定义事件
+      		this.$emit()
+			*/
+
 			var data = {counter:0}
 
 			Vue.component('button-counter',{
@@ -19,7 +25,11 @@
 					methods:{
 						incrementCounter:function(){
 							this.counter += 1
+
+							// *************************
 							this.$emit('increment')   //执行当前事件
+							// *************************
+
 						}
 					}
 				}),
