@@ -7,7 +7,7 @@
   /*
     组件通信---子对父
       通过触发自定义事件
-      this.$emit()
+      this.$emit()用于绑定父组件中触发的自定义事件名(eg:click...)
   */
   export default {
     methods:{
