@@ -14,13 +14,6 @@
   import {addClass} from 'common/js/dom'
   // better-scroll此版本为0.1.15,最新版本写法有改动
   // better-scroll作用域：父元素的第一个子元素起作用
-  /*
-    ref被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
-      在标签中定义ref属性，相当于给该标签标注一个锚点，在js代码中，通过 this.$ref+'ref属性值' 对象来获得该标签
-    例：
-      <p ref="p">hello</p>
-          this.$ref.p  ===  节点p
-  */
   import BScroll from 'better-scroll'
 
   export default {
@@ -99,7 +92,6 @@
         }
         this.$refs.sliderGroup.style.width = width + 'px'
       },
-      // 初始化slider
       _initSlider() {
         this.slider = new BScroll(this.$refs.slider, {
           scrollX: true,

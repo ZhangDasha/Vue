@@ -1,10 +1,5 @@
 import originJsonp from 'jsonp'
 
-/*
-  jsonp插件的参数：
-    jsonp(url, opts, callback)
-*/
-
 export default function jsonp(url, data, option) {
   url += (url.indexOf('?') < 0 ? '?' : '&') + param(data)
 
@@ -19,9 +14,6 @@ export default function jsonp(url, data, option) {
   })
 }
 
-/*
-  将data拼接到url中
-*/
 export function param(data) {
   let url = ''
   for (var k in data) {

@@ -22,4 +22,8 @@ npm run build --report
     视频中的vue-cli webpack 模板为1.2.4之前的配置方法，现最新版本配置有改动。见webpack-dev-server.js文件
     
     
+<<<<<<< HEAD
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+>>>>>>> parent of 27fadda5... 更新
