@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="">
+  <title>事件修饰符</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="showSome(1234, $event)">click me</button>
+  </div>
+  <script type="text/javascript">
+    /*
+      如果写成一个函数执行的模式，必须往里面注入一个函数对象$event，
+
+      事件修饰符：
+        .stop:          阻止冒泡
+        .prevent:       阻止默认事件
+        .enter          按键修饰符： 当input时按enter键时触发事件
+        系统修饰符 .meta .shift
+    */
+    new Vue({
+      el:"#app",
+      methods:{
+        showSome:function(msg, event){
+          console.log(event.target);
+          console.log(msg);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
