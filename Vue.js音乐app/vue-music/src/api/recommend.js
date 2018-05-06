@@ -2,10 +2,15 @@ import jsonp from 'common/js/jsonp'
 import {commonParams, options} from './config'
 import axios from 'axios'
 
+/*
+  抓取接口数据依赖：jsonp和公共参数
+*/
 export function getRecommend() {
+  // URL
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
   const data = Object.assign({}, commonParams, {
+    // 参数
     platform: 'h5',
     uin: 0,
     needNewCode: 1

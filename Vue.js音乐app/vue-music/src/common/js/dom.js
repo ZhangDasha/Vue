@@ -13,6 +13,9 @@ export function addClass(el, className) {
   el.className = newClass.join(' ')
 }
 
+/*
+  获取 data- 属性
+*/
 export function getData(el, name, val) {
   const prefix = 'data-'
   if (val) {

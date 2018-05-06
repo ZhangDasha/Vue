@@ -53,7 +53,7 @@
     },
     methods: {
       loadImage() {
-        // 设置标识位
+        // 设置标识位确保这个函数只执行一次，在this上定义变量checkloaded
         if (!this.checkloaded) {
           this.checkloaded = true
           this.$refs.scroll.refresh()

@@ -1,6 +1,7 @@
 <template>
   <div class="singer" ref="singer">
-    <list-view :data="singers" ref="list"></list-view>
+    <list-view :data="singers" ref="list" @select="selectSinger"></list-view>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -8,6 +9,7 @@
   import {ERR_OK} from 'api/config'
   import Singer from 'common/js/singer'
   import ListView from 'base/listview/listview'
+  import {mapMutations} from 'vuex'
 
   const HOT_SINGER_LEN = 10
   const HOT_NAME = '热门'
@@ -22,6 +24,12 @@
       this._getSingerList()
     },
     methods: {
+      selectSinger(singer) {
+        this.$router.push({
+          path: `/singer/${singer.id}`
+        })
+        this.setSinger(singer)
+      },
       _getSingerList() {
         getSingerList().then((res) => {
           if (res.code === ERR_OK) {
@@ -47,10 +55,11 @@
             //   name: item.Fsinger_name
             //   avatar: `y.gtimg.cn/music/photo_new/T001R300x300M0000${item.Fsinger_mid}.jpg?max_age=2592000`
             // }
-            new Singer({
-              name: item.Fsinger_name,
-              id: item.Fsinger_mid
-            })
+            // 使用common/js/singer.js的构造类
+              new Singer({
+                id: item.Fsinger_mid,
+                name: item.Fsinger_name
+              })
             )
           }
           const key = item.Findex
@@ -66,7 +75,7 @@
           }))
         })
         // console.log(map)
-        // 为了得到有序列表，我们需要处理 map
+        // 为了得到有序列表，我们需要处理 map对象将其转换为有序列表
         let hot = []
         let ret = []
         for (let key in map) {
@@ -82,7 +91,11 @@
           return a.title.charCodeAt(0) - b.title.charCodeAt(0)
         })
         return hot.concat(ret)
-      }
+      },
+      ...mapMutations({
+        // 对象映射 将mutations的修改映射为一个方法名
+        setSinger: 'SET_SINGER'
+      })
     },
     components: {
       ListView

@@ -27,6 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     // 视频中的vue-cli webpack 模板 1.2.4 之前的配置方法
+    // 将本地：Referer: http://localhost:8080/，改为'https://c.y.qq.com/'。
     // qq服务器拒绝前端发送的jsonp请求，需要后端代理发送http请求
     // 在本地服务器通过axios向qq服务器发送自定义满足要求的referer和host字段http请求
     before(app){
