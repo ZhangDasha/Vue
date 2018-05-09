@@ -36,6 +36,16 @@
 
 	16. 使用 this.$nextTick( ) 加延时
 
+	17. 切歌时快速点击会发生错误，在audio上绑定canplay与error事件，设置标志位songReady只有在canplay时才能切换到下一曲。
+
+	18. 获取两个数之间的随机数
+		Math.floor(Math.random() * (max - min + 1) + min)
+	19.findIndex( )	ES6新增的数组方法，接收一个函数。数组中的每个元素都调用一次函数执行，返回符合条件的数组第一个元素位置
+
+	20.audio没有自动切换功能，所以歌曲自动播放完毕，并不会跳转下一首。但audio在歌曲播放完毕后会派发一个ended的事件，可以定义这个事件达到切歌。
+
+	21. object.getBoundingClientRect( )  方法返回元素的大小及其相对于视口的位置.
+	返回值是一个 DOMRect 对象(DOMRect 对象包含了一组用于描述边框的只读属性——left、top、right和bottom，单位为像素。除了 width 和 height 外的属性都是相对于视口的左上角位置而言的。)
 
 
 
