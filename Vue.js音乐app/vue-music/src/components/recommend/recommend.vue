@@ -39,7 +39,6 @@
   import Loading from 'base/loading/loading.vue'
   import {getRecommend, getDiscList} from 'api/recommend'
   import {ERR_OK} from 'api/config'
-
   export default {
     data() {
       return {
@@ -85,7 +84,6 @@
 </script>
 <style lang="stylus">
   @import "~common/stylus/variable"
-
   .recommend
     position: fixed
     width: 100%
