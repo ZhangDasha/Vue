@@ -39,7 +39,10 @@
   import Loading from 'base/loading/loading.vue'
   import {getRecommend, getDiscList} from 'api/recommend'
   import {ERR_OK} from 'api/config'
+  import {playlistMixin} from 'common/js/mixin'
+
   export default {
+    mixins: [playlistMixin],
     data() {
       return {
         recommends: [],
@@ -57,6 +60,11 @@
           this.checkloaded = true
           this.$refs.scroll.refresh()
         }
+      },
+      handlePlaylist(playlist) {
+        const bottom = playlist.length > 0 ? '60px' : ''
+        this.$refs.recommend.style.bottom = bottom
+        this.$refs.scroll.refresh()
       },
       _getRecommend() {
         getRecommend().then((res) => {
