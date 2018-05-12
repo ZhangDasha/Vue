@@ -6,6 +6,7 @@
 <script>
   import {mapGetters} from 'vuex'
   import {getSingerDetail} from 'api/singer'
+  import {processSongsUrl} from 'api/handlesongurl'
   import {ERR_OK} from 'api/config'
   import {createSong} from 'common/js/song'
   import MusicList from 'components/music-list/music-list'
@@ -40,8 +41,9 @@
         }
         getSingerDetail(this.singer.id).then((res) => {
           if (res.code === ERR_OK) {
-            this.songs = this._normalizeSongs(res.data.list)
-            // console.log(this.songs)
+            processSongsUrl(this._normalizeSongs(res.data.list)).then((songs) => {
+              this.songs = songs
+            })
           }
         })
       },

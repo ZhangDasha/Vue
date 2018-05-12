@@ -41,7 +41,8 @@ export function getDiscList() {
 }
 
 export function getSongList(disstid) {
-  const url = '/getSongList'
+  // const url = '/getSongList'
+  const url = '/getCdInfo'
 
   const data = Object.assign({}, commonParams, {
     disstid,

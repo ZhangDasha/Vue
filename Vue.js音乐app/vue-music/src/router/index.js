@@ -6,6 +6,7 @@ import Search from 'components/search/search.vue'
 import Singer from 'components/singer/singer.vue'
 import SingerDetail from 'components/singer-detail/singer-detail.vue'
 import Disc from 'components/disc/disc'
+import TopList from 'components/top-list/top-list'
 
 Vue.use(Router)
 
@@ -28,9 +29,9 @@ export default new Router({
     {
       path: '/singer',
       component: Singer,
+      // :id 以id为变量，达到跳到不同的子路由
       children: [
         {
-          // :id 以id为变量，达到跳到不同的子路由
           path: ':id',
           component: SingerDetail
         }
@@ -38,7 +39,14 @@ export default new Router({
     },
     {
       path: '/rank',
-      component: Rank
+      component: Rank,
+      // 排行榜详情
+      children: [
+        {
+          path: ':id',
+          component: TopList
+        }
+      ]
     },
     {
       path: '/search',

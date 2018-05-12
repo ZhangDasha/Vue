@@ -13,7 +13,7 @@ export function getSingerList() {
     hostUin: 0,
     needNewCode: 0,
     platform: 'yqq',
-    g_tk: 5381
+    g_tk: 1664029744
   })
   return jsonp(url, data, options)
 }
@@ -23,6 +23,7 @@ export function getSingerDetail(singerId) {
 
   const data = Object.assign({}, commonParams, {
     hostUin: 0,
+    loginUin: 0,
     needNewCode: 0,
     platform: 'yqq',
     order: 'listen',
