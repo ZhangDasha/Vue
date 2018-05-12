@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
+    <music-list :title="title" :bg-image="bgImage" :songs="songs" :rank="rank"></music-list>
   </transition>
 </template>
 <script>
@@ -25,7 +25,8 @@
     },
     data() {
       return {
-        songs: []
+        songs: [],
+        rank: true
       }
     },
     created() {
@@ -33,11 +34,10 @@
     },
     methods: {
       _getMusicList() {
-        // getMusicList(this.topList.id).then((res) => {
-        //   if (res.code === ERR_OK) {
-        //     this.songs = this._normalizeSongs(res.songlist)
-        //   }
-        // })
+        if (!this.topList.id) {
+          this.$router.push('/rank')
+          return
+        }
         getMusicList(this.topList.id).then((res) => {
           if (res.code === ERR_OK) {
             processSongsUrl(this._normalizeSongs(res.songlist)).then((res) => {

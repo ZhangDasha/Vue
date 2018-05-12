@@ -58,10 +58,10 @@
 
 	24. <router-view> 	对应着路由容器
 
+	25. 请求歌源的文件：
+		song-detail,	top-list,	disc
 
-	演员： 001Qu4I30eVFYb
-	哑巴： 0022VCY125pxlH
-	摩天大楼： 0026DBoG28Y4H
+	26. 
 
 
 

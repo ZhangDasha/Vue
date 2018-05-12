@@ -1,13 +1,5 @@
 'use strict'
-// const utils = require('./utils')
-// const webpack = require('webpack')
-// const config = require('../config')
-// const merge = require('webpack-merge')
-// const baseWebpackConfig = require('./webpack.base.conf')
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-// const portfinder = require('portfinder')
-// const axios = require('axios')
+
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
@@ -20,12 +12,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
-// 不起作用  ？？？
-// const express = require('express')
-// const app = express()
-// var apiRoutes = express.Router()
-// app.use('/api', apiRoutes)
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -59,30 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           console.log(e)
         })
       })
-      // app.get('/getSongList', function (req, res) {
-      //   const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
-      //   axios.get(url, {
-      //     headers: {
-      //       referer: 'https://c.y.qq.com/',
-      //       host: 'c.y.qq.com'
-      //     },
-      //     params: req.query
-      //   }).then((response) => {
-      //       var ret = response.data
-      //       // 返回的是JSONP格式的话
-      //       if (typeof ret === 'string') {
-      //           var reg = /^\w+\(({.+})\)$/
-      //           var matches = ret.match(reg)
-      //           if (matches) {
-      //               ret = JSON.parse(matches[1])
-      //           }
-      //       }
-      //       res.json(ret)
-      //   }).catch((e) => {
-      //     console.log(e)
-      //   })
-      // })
-
+      
       // 音乐文件url处理信息获取
       app.post('/getPurlUrl', bodyParser.json(), function (req, res) {
         const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'

@@ -37,12 +37,6 @@
           this.$router.push('/recommend')
           return
         }
-        // getSongList(this.disc.dissid).then((res) => {
-        //   if (res.code === ERR_OK) {
-        //     // console.log(res.cdlist[0].songlist)
-        //     this.songs = this._normalizeSongs(res.cdlist[0].songlist)
-        //   }
-        // })
         getSongList(this.disc.dissid).then((res) => {
           if (res.code === ERR_OK) {
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
