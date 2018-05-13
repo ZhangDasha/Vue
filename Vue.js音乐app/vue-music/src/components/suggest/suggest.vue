@@ -1,11 +1,11 @@
 <template>
-  <scroll @scrollBefore="scrollBefore" 
+  <scroll @beforeScroll="listScroll" 
           class="suggest" 
           ref="suggest" 
           :data="searchResult" 
           @scrollToEnd="pullupLoad" 
           :pullup="true" 
-          :scrollBefore="true"
+          :beforeScroll="beforeScroll"
   >
     <ul class="suggest-list">
       <li @click="selectItem(item)" 
@@ -23,6 +23,9 @@
       </li>
       <loading v-show="hasMore" title=""></loading>
     </ul>
+    <div class="no-result-wrapper" v-show="!hasMore && !searchResult.length">
+      <no-result title="抱歉， 暂无搜索结果"></no-result>
+    </div>
   </scroll>
 </template>
 <script>
@@ -34,6 +37,7 @@ import Loading from 'base/loading/loading'
 import Scroll from 'base/scroll/scroll'
 import Singer from 'common/js/singer'
 import {mapMutations, mapActions} from 'vuex'
+import NoResult from 'base/no-result/no-result'
 
 const TYPE_SINGER = 'singer'
 const perpage = 20
@@ -53,7 +57,8 @@ export default {
     return {
       page: 1,
       searchResult: [],
-      hasMore: true
+      hasMore: true,
+      beforeScroll: true
     }
   },
   methods: {
@@ -95,9 +100,9 @@ export default {
         return `${item.name}-${item.singer}`
       }
     },
-    scrollBefore() {
+    listScroll() {
       // 列表滚动前
-      this.$emit('listScrollBefore')
+      this.$emit('listScroll')
     },
     checkInvaid(song) {
       // 检查歌曲URL是否无效
@@ -170,7 +175,8 @@ export default {
   },
   components: {
     Loading,
-    Scroll
+    Scroll,
+    NoResult
   }
 }
 </script>
