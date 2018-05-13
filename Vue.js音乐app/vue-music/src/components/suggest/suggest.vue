@@ -75,7 +75,7 @@ export default {
       } else {
         // 点击歌曲
         this.insertSong(item)
-      };
+      }
       this.$emit('select')
     },
     pullupLoad() {

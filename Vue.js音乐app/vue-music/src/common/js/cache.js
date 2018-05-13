@@ -1,3 +1,10 @@
+// 操作localStorage
+/*
+  功能介绍：------->  模拟队列
+    共有15条数据；
+    每次都是头部插入进行，多于则从尾部删除；
+    如果插入数据已经存在，会删除原有数据，并在头部重新插入。
+*/
 import storage from 'good-storage'
 
 const SEARCH_KEY = '__search__'
@@ -10,6 +17,7 @@ const FAVORITE_KEY = '__favorite__'
 const FAVORITE_MAX_LEN = 200
 
 function insertArray(arr, val, compare, maxLen) {
+  // 判断数组中是否已经有此条数据
   const index = arr.findIndex(compare)
   if (index === 0) {
     return
@@ -39,6 +47,7 @@ export function saveSearch(query) {
   return searches
 }
 
+// 删除缓存中项目
 export function deleteSearch(query) {
   let searches = storage.get(SEARCH_KEY, [])
   deleteFromArray(searches, (item) => {
@@ -48,11 +57,13 @@ export function deleteSearch(query) {
   return searches
 }
 
+// 清空全部storage
 export function clearSearch() {
   storage.remove(SEARCH_KEY)
   return []
 }
 
+// 从本地缓冲读取searchList
 export function loadSearch() {
   return storage.get(SEARCH_KEY, [])
 }
@@ -91,4 +102,3 @@ export function deleteFavorite(song) {
 export function loadFavorite() {
   return storage.get(FAVORITE_KEY, [])
 }
-

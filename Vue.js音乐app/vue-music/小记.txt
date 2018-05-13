@@ -61,7 +61,7 @@
 	25. 请求歌源的文件：
 		song-detail,	top-list,	disc
 
-	26. 	
+	26. good-storage库： 是对sessionStorage与localStorage的封装	
 
 
 
