@@ -114,6 +114,9 @@ export default {
         return ''
       }
     },
+    refresh() {
+      this.$refs.suggest.refresh()
+    },
     _checkMore(data) {
       // 是否还有更多数据
       let song = data.song
