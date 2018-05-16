@@ -63,6 +63,15 @@
 
 	26. good-storage库： 是对sessionStorage与localStorage的封装	
 
+	27. @click.stop  什么都不写，仅仅是防止冒泡
+
+	28. vue中毕竟提供了transition的过渡效果，而且还为列表提供了transition-group, tag属性声明想要渲染的样式(ul/ol),  而且子元素需要  :key=' id', 用来做区分
+
+	29. 剔除了歌词与添加歌曲到列表组件
+
+	30. <router-view> 用于渲染加载指定的组件，相当于一个容器。当访问该路径时，router-view会被对应路径组件替换。
+	     <router-link>  相当于 <a> 标签，实现路由跳转。
+
 
 
 

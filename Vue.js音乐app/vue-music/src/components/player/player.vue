@@ -53,7 +53,7 @@
               <i class="icon-next" @click="next"></i>
             </div>
             <div class="icon i-right">
-              <i class="icon icon-not-favorite"></i>
+              <i class="icon" :class="getFavoriteIcon(currentSong)" @click="toggleFavorite(currentSong)"></i>
             </div>
           </div>
         </div>
@@ -72,11 +72,12 @@
         <div class="control">
           <i :class="miniIcon" @click.stop="togglePlay"></i>
         </div>
-        <div class="control">
+        <div class="control" @click.stop="showPlaylist">
           <i class="icon-playlist"></i>
         </div>
       </div>
     </transition>
+    <playlist ref='playlist'></playlist>
     <audio :src="currentSong.url" 
            ref="audio" 
            @canplay="ready" 
@@ -93,10 +94,13 @@
   import ProgressBar from 'base/progress-bar/progress-bar'
   import {playMode} from 'common/js/config'
   import {shuffle} from 'common/js/util'
+  import Playlist from 'components/playlist/playlist'
+  import {playerMixin} from 'common/js/mixin'
 
   const transform = prefixStyle('transform')
 
   export default {
+    mixins: [playerMixin],
     data() {
       return {
         songReady: false,
@@ -119,17 +123,10 @@
       percent() {
         return this.currentTime / this.currentSong.duration
       },
-      iconMode() {
-        return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
-      },
       ...mapGetters([
         'fullScreen',
-        'playlist',
-        'currentSong',
         'playing',
-        'currentIndex',
-        'mode',
-        'sequenceList'
+        'currentIndex'
       ])
     },
     methods: {
@@ -235,6 +232,7 @@
           this.togglePlay()
         }
       },
+      // 切换播放模式
       changeMode() {
         const mode = (this.mode + 1) % 3
         this.setPlayMode(mode)
@@ -264,6 +262,9 @@
       loop() {
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
+      },
+      showPlaylist() {
+        this.$refs.playlist.show()
       },
       _pad(num, n = 2) {
         let len = num.toString().length
@@ -299,6 +300,9 @@
     },
     watch: {
       currentSong(newSong, oldSong) {
+        if (!newSong.id) {
+          return
+        }
         if (newSong.id === oldSong.id) {
           return
         }
@@ -315,7 +319,8 @@
       }
     },
     components: {
-      ProgressBar
+      ProgressBar,
+      Playlist
     }
   }
 </script>
