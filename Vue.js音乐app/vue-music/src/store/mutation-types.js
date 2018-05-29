@@ -1,5 +1,5 @@
 /*
-  mutation 相关信息
+  mutation 事件类型相关信息
 */
 
 export const SET_SINGER = 'SET_SINGER'

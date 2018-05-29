@@ -12,6 +12,7 @@ import createLogger from 'vuex/dist/logger.js'
 
 Vue.use(Vuex)
 
+// 生成 State 快照，比较改变的前后状态
 const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({

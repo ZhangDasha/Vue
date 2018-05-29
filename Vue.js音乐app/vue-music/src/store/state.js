@@ -1,5 +1,5 @@
 /*
-  vuex 的状态管理
+  vuex 中管理的数据
 */
 
 import {playMode} from 'common/js/config'

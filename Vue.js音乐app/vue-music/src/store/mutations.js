@@ -1,5 +1,10 @@
 import * as types from './mutation-types.js'
 
+/*
+  使用 ES6 风格的计算属性命名功能来使用一个常量作为函数名
+  负责改变数据
+*/
+
 const mutations = {
   [types.SET_SINGER](state, singer) {
     state.singer = singer

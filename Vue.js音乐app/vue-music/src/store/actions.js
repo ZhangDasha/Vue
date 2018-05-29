@@ -1,5 +1,6 @@
 /*
-  异步操作或对mutation的封装
+  进行异步 mutation 操作
+  负责业务逻辑
 */
 
 import * as types from './mutation-types'

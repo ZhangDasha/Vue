@@ -1,5 +1,7 @@
 小记：
 	1. css预编译：stylus方式
+		字符 & 引用父元素
+		如果遇到Stylus搞不定的需求，你可以使用@css使其作为CSS字面量解决之。
 
 	2. 接口的获取：
 		1. 进入手机版模式，m.y.qq.com
@@ -21,7 +23,7 @@
 
 	7. recommend异步加载时：如果轮播图的加载在歌单后面，歌单渲染就会差一个轮播图。监听图片load事件函数。
 
-	8. better-scroll使用前dom要是渲染好的，可以计算高度的。当dom发生改变时需要重新refresh() better-scroll。
+	8. better-scroll使用前dom要是渲染好的，可以计算高度的。当dom发生改变时需要重新refresh( )  better-scroll。
 	
 	9. 歌单图片懒加载，借用第三方插件 vue-lazyload
 		v-lazy 代替 :src
@@ -65,14 +67,19 @@
 
 	27. @click.stop  什么都不写，仅仅是防止冒泡
 
-	28. vue中毕竟提供了transition的过渡效果，而且还为列表提供了transition-group, tag属性声明想要渲染的样式(ul/ol),  而且子元素需要  :key=' id', 用来做区分
+	28. vue中不仅提供了transition的过渡效果，而且还为列表提供了transition-group, tag属性声明想要渲染的样式(ul/ol),  而且子元素需要  :key=' id', 用来做区分
 
 	29. 剔除了歌词与添加歌曲到列表组件
 
 	30. <router-view> 用于渲染加载指定的组件，相当于一个容器。当访问该路径时，router-view会被对应路径组件替换。
 	     <router-link>  相当于 <a> 标签，实现路由跳转。
 
+	31. 规避 eslint 的语法检查： 
+		/*eslint-disable no-unused-vars*/
 
+	32. 引入 vConsole 包文件，可在手机移动端实现 console.log( ) 控制台
+
+	33. Charles 抓包工具 收费。。。
 
 
 
