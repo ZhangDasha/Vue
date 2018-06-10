@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <child-component>
+      <template scope="props">
+        <p>来自父组件的内容</p>
+        <p>{{ props.msg }}</p>
+      </template>
+    </child-component>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    /*
+      Vue 2.5已废弃scope
+
+      作用域插槽是一种特殊的slot，使用一个可以复用的模版替换已渲染的元素
+      
+      这里scope=‘props’中props只是一个临时变量
+      template內可以通过临时变量props访问来自子组件插槽的数据msg
+    */
+    Vue.component('child-component', {
+      template: `<div class="container">
+                    <slot msg="来自子组件的内容"></slot>
+                 </div>`
+    })
+    var vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

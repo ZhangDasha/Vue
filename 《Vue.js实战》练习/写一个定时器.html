@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>定时器</title>
+</head>
+<body>
+  <div id="app">{{date}}</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+  /*
+    知识点：
+      1. 考察Vue生命周期钩子的注意事项
+        a created时只完成了数据的观测
+        b mounted时加载实例对象
+        c 摧毁前主要是解绑监听事件
+      2. 考察this的作用范围
+        用变量记录this
+      3. 考察定时器的使用
+  */
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      date:new Date()
+    },
+    mounted:function(){
+      var _this = this
+      var timer = setInterval(function(){
+        _this.date = new Date()
+      }, 1000)
+    },
+    beforeDestroy:function() {
+      if (this.timer) 
+        clearInterval(timer)
+    }
+  })
+</script>
+</html>

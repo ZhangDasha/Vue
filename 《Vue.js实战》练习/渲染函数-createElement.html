@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ele></ele>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // template的写法
+
+    /*Vue.component('ele', {
+      template: `<div id="element"
+                  :class="{show: show}"
+                  @click="handleClick"
+                 >文本子节点</div>`,
+      data() {
+        return {
+          show: true
+        }
+      },
+      methods: {
+        handleClick() {
+          console.log('clicked')
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app'
+    })
+    */
+
+    // render 的写法
+    /*
+      createElement 用法
+        第一个参数必选，可以是一个HTML标签，也可以是一个组件或函数；
+        第二个是可选参数，数据对象，在 template 中使用。
+        第三个是子节点，也是可选参数，用法一致。
+    */
+    Vue.component('ele', {
+      render(createElement) {
+        return createElement(
+          'div',
+          {
+            // 动态绑定class，同 :class
+            class: {
+              'show': this.show
+            },
+            attrs: {
+              id: 'element'
+            },
+            on: {
+              click: this.handleClick
+            }
+          },
+          '文本子节点'
+        )
+      },
+      data() {
+        return {
+          show: true
+        }
+      },
+      methods: {
+        handleClick() {
+          console.log('clicked')
+        }
+      }
+    })
+    var app = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

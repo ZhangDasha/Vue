@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span v-for="(value, key) in user">{{key}}:{{value}} </span>
+    <span v-for="n in 10">{{n}}</span>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  /*
+    v-for 遍历对象时，有两个可选参数，分别是键名和索引
+    v-for 可叠戴整数
+  */
+  var vm = new Vue({
+    el:"#app",
+    data:{
+      user:{
+        name:'DaSha',
+        gender:"男",
+        age:24
+      }
+    }
+  })
+</script>
+</body>
+</html>

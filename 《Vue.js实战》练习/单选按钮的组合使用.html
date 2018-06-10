@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="radio" id="html" v-model="picked" value="html">
+    <label for="html">HTML</label>
+    <br>
+    <input type="radio" id="js" v-model="picked" value="js">
+    <label for="js">JavaScript</label>
+    <br>
+    <input type="radio" id="css" v-model="picked" value="css">
+    <label for="css">CSS</label>
+    <br>
+    <p>选择是：{{picked}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    /*
+      数据picked的值与单选框的value值一致时，就会选中该项
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        picked: 'js'
+      }
+    })
+  </script>
+</body>
+</html>
