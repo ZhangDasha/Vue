@@ -27,3 +27,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 =======
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 >>>>>>> parent of 27fadda5... 更新
+
+## 展示
+![推荐页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/play.GIF)
