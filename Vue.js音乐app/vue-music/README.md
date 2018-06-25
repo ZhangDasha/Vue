@@ -31,11 +31,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## 展示
     这是推荐页面
 ![推荐页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/recommend.GIF)
-    这是歌手页面
+    # 这是歌手页面
 ![歌手页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/singer.GIF)
-    这是排行页面
+    # 这是排行页面
 ![排行页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/rank.GIF)
-     这是搜索页面
+     # 这是搜索页面
  ![搜索页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/search.GIF)
-      这是播放器页面
+     # 这是播放器页面
   ![播放器页面](https://github.com/ZhangDasha/Vue/blob/master/Vue.js%E9%9F%B3%E4%B9%90app/vue-music/static/play.GIF)
