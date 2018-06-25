@@ -15,8 +15,9 @@
       		3. 父组件利用自定义事件，执行父组件中定义的事件函数。 
 			*/
 
-			var data = {counter:0}
+			// var data = {counter:0}
 
+			// 获取data()中的数据，并添加一个点击事件
 			Vue.component('button-counter',{
 					template:'<button v-on:click="incrementCounter">{{ counter }}</button>', //子组件点击触发incrementCounter
 					data:function() {
@@ -27,11 +28,7 @@
 					methods:{
 						incrementCounter:function(){
 							this.counter += 1
-
-							// *************************
-							this.$emit('increment')   //执行当前事件
-							// *************************
-
+							this.$emit('increment')  //自定义事件$emit传回根组件，同时调用根组件方法
 						}
 					}
 				}),
@@ -47,11 +44,7 @@
 					}
 				}
 			})
-
-		}
-
-			
-		
+		}		
 	</script>
 </head>
 <body>
@@ -60,7 +53,6 @@
 		<button-counter v-on:increment="incrementTotal"></button-counter>
 		<!-- 父组件v-on监听子组件触发的事件后，触发函数incrementTotal -->
 		<button-counter v-on:increment="incrementTotal"></button-counter>
-	</div>
-	
+	</div>	
 </body>
 </html>

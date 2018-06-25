@@ -24,12 +24,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    // Node.js 发送 http
     // 视频中的vue-cli webpack 模板 1.2.4 之前的配置方法
     // 将本地：Referer: http://localhost:8080/，改为'https://c.y.qq.com/'。
     // qq服务器拒绝前端发送的jsonp请求，需要后端代理发送http请求
     // 在本地服务器通过axios向qq服务器发送自定义满足要求的referer和host字段http请求
     before(app){
-      app.use(bodyParser.urlencoded({extended: true}))
+      app.use(bodyParser.urlencoded({extended: true}))  //NodeJs语句解析文本文件
       // 歌单列表代理
       app.get('/getDiscList', function (req, res) {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
@@ -38,6 +39,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             referer: 'https://c.y.qq.com/',
             host: 'c.y.qq.com'
           },
+          // 参数
           params: req.query
         }).then((response) => {
           res.json(response.data)

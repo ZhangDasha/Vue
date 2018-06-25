@@ -19,6 +19,8 @@ export function getRecommend() {
 }
 
 export function getDiscList() {
+  // 不直接向qq服务端请求，先向后台server端的api发起请求
+  // Ajax 请求，
   const url = '/getDiscList'
 
   const data = Object.assign({}, commonParams, {

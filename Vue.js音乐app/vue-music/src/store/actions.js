@@ -1,6 +1,7 @@
 /*
-  进行异步 mutation 操作
-  负责业务逻辑
+action： 负责业务逻辑
+  1. 进行异步 mutation 操作。
+  2. 对 mutation 进行封装，实现某一动作对多个mutation的操作。
 */
 
 import * as types from './mutation-types'

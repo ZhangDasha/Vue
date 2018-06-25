@@ -78,6 +78,14 @@
       </div>
     </transition>
     <playlist ref='playlist'></playlist>
+    <!-- 
+      audio标签的使用：
+        src 对应歌曲地址
+        当歌曲能播放时会派发canplay事件
+        当歌曲发生错误派发error事件
+        当歌曲在播放时会派发一个timeupdate事件
+        单歌曲播放结束派发一个ended事件
+    -->
     <audio :src="currentSong.url" 
            ref="audio" 
            @canplay="ready" 
@@ -123,6 +131,7 @@
       percent() {
         return this.currentTime / this.currentSong.duration
       },
+      // mapGetters是Vuex的语法糖，通过它暴露getters內的方法，供调用。
       ...mapGetters([
         'fullScreen',
         'playing',
@@ -182,6 +191,7 @@
         }
         this.setPlayingState(!this.playing)
       },
+      // 歌曲的切换本质是改变当前歌曲的索引
       next() {
         if (!this.songReady) {
           return
@@ -190,7 +200,8 @@
         if (index === this.playlist.length) {
           index = 0
         }
-        this.setCurrentIndex(index)
+        this.setCurrentIndex(index)  // 提交mutation
+
         if (!this.playing) {
           this.togglePlay()
         }
@@ -205,6 +216,7 @@
           index = this.playlist.length - 1
         }
         this.setCurrentIndex(index)
+
         if (!this.playing) {
           this.togglePlay()
         }
@@ -218,6 +230,7 @@
         this.songReady = true
       },
       updateTime(e) {
+        // 获取歌曲播放时间
         this.currentTime = e.target.currentTime
       },
       format(interval) {
@@ -233,24 +246,27 @@
         }
       },
       // 切换播放模式
+      // 播放模式对应Vuex里面的mode字段
       changeMode() {
         const mode = (this.mode + 1) % 3
         this.setPlayMode(mode)
+        // 修改播放列表
         let list = null
         if (mode === playMode.random) {
-          list = shuffle(this.sequenceList)
+          list = shuffle(this.sequenceList)  // 打乱sequenceList原始列表，拷贝给list。
         } else {
           list = this.sequenceList
         }
-        this.resetCurrentList(list)
-        this.setPlaylist(list)
+        this.resetCurrentList(list)  // 切换播放模式后，不改变当前的歌曲播放
+
+        this.setPlaylist(list)  // 将修改后的list传递给mutatons內的'SET_PLATLIST'
       },
       // 处理切换播放模式时，当前正在播放歌曲的currentIndex
       resetCurrentList(list) {
         let index = list.findIndex((item) => {
-          return item.id === this.currentSong.id
+          return item.id === this.currentSong.id  // 在list中找到当前播放歌曲的索引
         })
-        this.setCurrentIndex(index)
+        this.setCurrentIndex(index)  // 将此索引传递给mutaions的SET_CURRENT_INDEX
       },
       end() {
         if (this.mode === playMode.loop) {
@@ -291,6 +307,7 @@
         }
       },
       ...mapMutations({
+        // 从mutations中映射一个方法名，实现对state内数据的操作
         setFullScreen: 'SET_FULL_SCREEN',
         setPlayingState: 'SET_PLAYING_STATE',
         setCurrentIndex: 'SET_CURRENT_INDEX',

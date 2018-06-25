@@ -17,7 +17,7 @@ const state = {
   sequenceList: [],
   // 播放模式
   mode: playMode.sequence,
-  currentIndex: -1,
+  currentIndex: -1,  // 当前歌曲下标
   // 歌单对象
   disc: {},
   // 排行榜详情页

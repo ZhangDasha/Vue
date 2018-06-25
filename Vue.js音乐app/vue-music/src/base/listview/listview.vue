@@ -82,6 +82,7 @@
       selectItem(item) {
         this.$emit('select', item)
       },
+      //  e.target 获取触发事件的DOM元素
       onShortcutTouchStart(e) {
         let anchorIndex = getData(e.target, 'index')
         let firstTouch = e.touches[0]

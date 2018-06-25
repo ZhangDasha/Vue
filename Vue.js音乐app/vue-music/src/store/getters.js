@@ -1,5 +1,5 @@
 /*
-  获取数据
+  对数据进行映射
 */
 
 export const singer = state => state.singer

@@ -1,5 +1,6 @@
 /*
   mutation 事件类型相关信息
+    mutaions内用到的修改动作
 */
 
 export const SET_SINGER = 'SET_SINGER'

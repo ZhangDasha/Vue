@@ -1,11 +1,13 @@
 import * as types from './mutation-types.js'
 
 /*
+mutations:定义对数据修改的逻辑
   使用 ES6 风格的计算属性命名功能来使用一个常量作为函数名
   负责改变数据
 */
 
 const mutations = {
+  // 本质是函数，ES6语法 [Const] = 函数名
   [types.SET_SINGER](state, singer) {
     state.singer = singer
   },

@@ -1,6 +1,7 @@
 import originJsonp from 'jsonp'
 
 // 将jsonp请求Promise化
+// data是链接参数
 export default function jsonp(url, data, option) {
   url += (url.indexOf('?') < 0 ? '?' : '&') + param(data)
 

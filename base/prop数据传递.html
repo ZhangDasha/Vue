@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -30,3 +30,45 @@
 </html>
 	
 
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>props 数据传递</title>
+ 	<script src="vue.js"></script>
+ </head>
+ <body>
+ 	<div id="example">
+  	<parent></parent>
+	</div>
+ </body>
+ <script type="text/javascript">
+
+ 	// 定义子组件
+ 	var childNode = {
+	  template: '<div>{{message}}</div>',
+	  props:['message']
+	}
+	// 定义父组件
+	var parentNode = {
+	  template: `
+	  <div class="parent">
+	    <child message="aaa"></child>
+	    <child message="bbb"></child>
+	  </div>`,
+	  components: {
+	    'child': childNode  //引入子childNode组件
+	  }
+	}
+	
+	// 创建根实例
+	new Vue({
+	  el: '#example',
+	  components: {
+	    'parent': parentNode
+	  }
+	})
+ </script>
+ </html>
